@@ -1,7 +1,6 @@
 :root{
     --fontColor : rgb(255, 255, 255);
     --background : #ff0000;
-    /*--background : transparent;*/
 }
 
 body{
@@ -43,9 +42,7 @@ h1{
     padding: 10px 10px 10px 10px;
 }
 
-
-/*  Bouton  */
-
+/*  Button  */
 button {
     margin-top: 2%;
     border-radius: 5px;
@@ -68,6 +65,7 @@ button {
     color: rgb(0, 0, 0);
   }
 
+  /*  Div with "Travail" and "Pause"  */
   .divTravailPause p{
     font-size: 18px;
     display: inline;
@@ -83,10 +81,12 @@ button {
     border-radius: 10px;
   }
 
+  /*  Actual Mod ("Travail" or "Pause")  */
   .actual{
     font-weight: bold;
   }
 
+  /*  Input for modify the time of the 2 mods  */
   input{
     -moz-appearance: textfield;
     height: 25px;
@@ -108,6 +108,7 @@ button {
     align-items: center;
   }
 
+/*  Hide or Make visible the input with the button in JS */
   .hidden{
     visibility: hidden;
   }
