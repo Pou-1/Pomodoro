@@ -86,3 +86,32 @@ button {
   .actual{
     font-weight: bold;
   }
+
+  input{
+    -moz-appearance: textfield;
+    height: 25px;
+    font-size: 22px;
+    text-align: center;
+    width: 10%;
+  }
+
+  .Temps p, input{
+    font-size: 22px;
+    display: inline;
+  }
+
+  .Titreactual{
+    font-size: 40px;
+  }
+
+  .centre{
+    align-items: center;
+  }
+
+  .hidden{
+    visibility: hidden;
+  }
+
+  .visible{
+    visibility: visible;
+  }

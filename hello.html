@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
+        <meta charset="UTF-8">
         <title>Ma</title>
         <link rel="stylesheet" href="style.css">
     </head>
@@ -16,20 +17,32 @@
                 <button id="stopTimer" class="yes stopTimer" onclick="functStopStartTimer()">Start</button>
             </div>
         </div>
-        <p id="Modifier1" class="Titreactual">Travail : </p>
-        <input type="number" id="TravailHeures" value="0">
-        <p> heures </p>
-        <input type="number" id="TravailMinutes" value="25">
-        <p> minutes </p>
-        <input type="number" id="TravailSecondes" value="0">
-        <p> secondes </p>
-        <input type="number" id="TravailHeures" value="0">
-        <p id="Modifier3" class="Titreactual">Pause : </p>
-        <p> heures </p>
-        <input type="number" id="TravailMinutes" value="25">
-        <p> minutes </p>
-        <input type="number" id="TravailSecondes" value="0">
-        <p> secondes </p>
+
+        <div class="centre">
+            <button id="modifTimer" class="modifTimer" onclick="functModifTimer()">Modifier les temps</button>
+        </div>
+
+        <div id="Modifier" class="hidden">
+            <p id="Modifier1" class="Titreactual">Travail : </p>
+            <div id="Modifier2" class="Temps">
+                <input type="number" id="TravailHeures" value="0">
+                <p> heures </p>
+                <input type="number" id="TravailMinutes" value="25">
+                <p> minutes </p>
+                <input type="number" id="TravailSecondes" value="0">
+                <p> secondes </p>
+            </div>
+
+            <p id="Modifier3" class="Titreactual">Pause : </p>
+            <div id="Modifier4" class="Temps">
+                 <input type="number" id="PauseHeures" value="0">
+                <p> heures </p>
+                <input type="number" id="PauseMinutes" value="5">
+                <p> minutes </p>
+                <input type="number" id="PauseSecondes" value="0">
+                <p> secondes </p>
+            </div>
+        </div>
+        <script src="script.js"></script>
     </body>
-    <script src="script.js"></script>
 </html>

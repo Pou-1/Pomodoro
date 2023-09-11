@@ -97,3 +97,62 @@ function functStopStartTimer(){
         document.getElementById("stopTimer").innerText = "Stop";
     }
 }
+
+document.getElementById("TravailHeures").addEventListener("change", (event) => {
+    if(travail == 1){
+        let heures = event.target.value;
+        document.getElementById("timer").innerHTML = formatHour(heures, minutes, secondes, heuresPrint, minutesPrint, secondesPrint);
+    }
+  });
+
+  document.getElementById("TravailMinutes").addEventListener("change", (event) => {
+    if(travail == 1){
+        minutes = event.target.value;
+        document.getElementById("timer").innerHTML = formatHour(heures, minutes, secondes, heuresPrint, minutesPrint, secondesPrint);
+    }
+  });
+
+  document.getElementById("TravailSecondes").addEventListener("change", (event) => {
+    if(travail == 1){
+        secondes = event.target.value;
+        document.getElementById("timer").innerHTML = formatHour(heures, minutes, secondes, heuresPrint, minutesPrint, secondesPrint);
+    }
+    });
+
+  document.getElementById("PauseHeures").addEventListener("change", (event) => {
+  	if(travail == 0){
+    	heures = event.target.value;
+    	document.getElementById("timer").innerHTML = formatHour(heures, minutes, secondes, heuresPrint, minutesPrint, secondesPrint);
+    }
+  });
+
+  document.getElementById("PauseMinutes").addEventListener("change", (event) => {
+	  if(travail == 0){
+	    	minutes = event.target.value;
+	    	document.getElementById("timer").innerHTML = formatHour(heures, minutes, secondes, heuresPrint, minutesPrint, secondesPrint);
+	    }
+  });
+
+  document.getElementById("PauseSecondes").addEventListener("change", (event) => {
+    if(travail == 0){
+        secondes = event.target.value;
+        document.getElementById("timer").innerHTML = formatHour(heures, minutes, secondes, heuresPrint, minutesPrint, secondesPrint);
+    }
+  });
+
+  
+let modif = 0;
+
+function functModifTimer(){
+    console.log("Modif");
+    if(modif == 0){
+        document.getElementById("Modifier").classList.remove("hidden");
+        document.getElementById("Modifier").classList.toggle("visible");
+        modif = 1;
+    }
+    else{
+        document.getElementById("Modifier").classList.remove("visible");
+        document.getElementById("Modifier").classList.toggle("hidden");
+        modif = 0;
+    }
+}
