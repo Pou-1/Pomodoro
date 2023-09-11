@@ -2,9 +2,9 @@
 
 //Exercice timer------------------------------------------
 
-let heures = 0;
-let minutes = 25;
-let secondes = 0;
+let heures = document.getElementById("TravailHeures").value;
+let minutes = document.getElementById("TravailMinutes").value;
+let secondes = document.getElementById("TravailSecondes").value;
 let secondesPrint;
 let minutesPrint;
 let heuresPrint;
@@ -68,17 +68,17 @@ setInterval(() => {
             secondes -= 1;
         }
         if(minutes == 0 && heures == 0 && secondes == 0 && travail == 1){
-            heures = 0;
-            minutes = 5;
-            secondes = 0;
+            heures = document.getElementById("PauseHeures").value;
+            minutes = document.getElementById("PauseMinutes").value;
+            secondes = document.getElementById("PauseSecondes").value;
             travail = 0;
             document.getElementById("Travail").classList.remove("actual");
             document.getElementById("Pause").classList.toggle("actual");
         }
         if(minutes == 0 && heures == 0 && secondes == 0 && travail == 0){
-            heures = 0;
-            minutes = 25;
-            secondes = 0;
+            heures = document.getElementById("TravailHeures").value;
+            minutes = document.getElementById("TravailMinutes").value;
+            secondes = document.getElementById("TravailSecondes").value;
             travail = 1;
             document.getElementById("Pause").classList.remove("actual");
             document.getElementById("Travail").classList.toggle("actual");
