@@ -1,12 +1,12 @@
 :root{
-    --fontColor : rgb(255, 255, 255);
-    --background : #ff0000;
+  --fontColor : rgb(255, 255, 255);
+  --background : #ff0000;
 }
 
 body{
-    text-align: center;
-    background: var(--background);
-    color : var(--fontColor);
+  text-align: center;
+  background: var(--background);
+  color : var(--fontColor);
 }
 
 h1{
@@ -15,104 +15,104 @@ h1{
 
 
 #timer{
-    font-size: 40px;
+  font-size: 40px;
 }
 
-  .time {
-    margin: 0 auto;
-    margin-top: 2%;
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 3px solid #ffffff;
-    font-weight: bold;
+.time {
+  margin: 0 auto;
+  margin-top: 2%;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid #ffffff;
+  font-weight: bold;
 }
 
 .button-container {
-    display: flex;
-    margin-top: 10px;
+  display: flex;
+  margin-top: 10px;
 }
 
 .stopTimer {
-    margin-right: 10px;
-    padding: 10px 10px 10px 10px;
+  margin-right: 10px;
+  padding: 10px 10px 10px 10px;
 }
 
 /*  Button  */
 button {
-    margin-top: 2%;
-    border-radius: 5px;
-    background-color: transparent;
-    width: fit-content;
-    height: fit-content;
-    padding: 2% 2% 2% 2%;
-    text-align: center;
-    -webkit-transition-duration: 0.4s;
-    transition-duration: 0.4s;
-    text-decoration: none;
-    font-size: 20px;
-    color: #ffffff;
-    border: 2px solid #ffffff;
-    cursor: pointer;
-  }
+  margin-top: 2%;
+  border-radius: 5px;
+  background-color: transparent;
+  width: fit-content;
+  height: fit-content;
+  padding: 2% 2% 2% 2%;
+  text-align: center;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  text-decoration: none;
+  font-size: 20px;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  cursor: pointer;
+}
   
-  button:hover {
-    background-color: #ffffff;
-    color: rgb(0, 0, 0);
-  }
+button:hover {
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+}
 
-  /*  Div with "Travail" and "Pause"  */
-  .divTravailPause p{
-    font-size: 18px;
-    display: inline;
-    margin-left: 5%;
-    margin-right: 5%;
-  }
+/*  Div with "Travail" and "Pause"  */
+.divTravailPause p{
+  font-size: 18px;
+  display: inline;
+  margin-left: 5%;
+  margin-right: 5%;
+}
 
-  .divTravailPause{
-    margin: 0 auto;
-    height: 22px;
-    width: 20%;
-    border: 2px solid #ffffff;
-    border-radius: 10px;
-  }
+.divTravailPause{
+  margin: 0 auto;
+  height: 22px;
+  width: 20%;
+  border: 2px solid #ffffff;
+  border-radius: 10px;
+}
 
-  /*  Actual Mod ("Travail" or "Pause")  */
-  .actual{
-    font-weight: bold;
-  }
+/*  Actual Mod ("Travail" or "Pause")  */
+.actual{
+  font-weight: bold;
+}
 
-  /*  Input for modify the time of the 2 mods  */
-  input{
-    -moz-appearance: textfield;
-    height: 25px;
-    font-size: 22px;
-    text-align: center;
-    width: 10%;
-  }
+/*  Input for modify the time of the 2 mods  */
+input{
+  -moz-appearance: textfield;
+  height: 25px;
+  font-size: 22px;
+  text-align: center;
+  width: 10%;
+}
 
-  .Temps p, input{
-    font-size: 22px;
-    display: inline;
-  }
+.Temps p, input{
+  font-size: 22px;
+  display: inline;
+}
 
-  .Titreactual{
-    font-size: 40px;
-  }
+.Titreactual{
+  font-size: 40px;
+}
 
-  .centre{
-    align-items: center;
-  }
+.centre{
+  align-items: center;
+}
 
 /*  Hide or Make visible the input with the button in JS */
-  .hidden{
-    visibility: hidden;
-  }
+.hidden{
+  visibility: hidden;
+}
 
-  .visible{
-    visibility: visible;
-  }
+.visible{
+  visibility: visible;
+}
