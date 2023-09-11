@@ -67,3 +67,22 @@ button {
     background-color: #ffffff;
     color: rgb(0, 0, 0);
   }
+
+  .divTravailPause p{
+    font-size: 18px;
+    display: inline;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  .divTravailPause{
+    margin: 0 auto;
+    height: 22px;
+    width: 20%;
+    border: 2px solid #ffffff;
+    border-radius: 10px;
+  }
+
+  .actual{
+    font-weight: bold;
+  }

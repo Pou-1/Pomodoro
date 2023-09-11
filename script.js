@@ -13,12 +13,12 @@ let travail = 1;
 
 let StopStartTimer = 0;
 
-document.getElementById("timer").innerHTML = heures + " : " + minutes + " :" + secondes;
+document.getElementById("timer").innerHTML = formatHour(heures, minutes, secondes);
 
 function formatHour(Heures, Minutes, Secondes, HeuresPrint, MinutesPrint, SecondesPrint) {
     console.log(Heures);
     if(Heures < 10){
-        if(Heures == null){
+        if(Heures == ""){
             HeuresPrint = "00";
         }
         else{
@@ -29,13 +29,23 @@ function formatHour(Heures, Minutes, Secondes, HeuresPrint, MinutesPrint, Second
         HeuresPrint = Heures;
     }
     if(Minutes < 10){
-        MinutesPrint = "0" + Minutes;
+        if(Minutes == ""){
+            MinutesPrint = "00";
+        }
+        else{
+            MinutesPrint = "0" + Minutes;
+        }
     }
     else{
         MinutesPrint = Minutes;
     }
     if(Secondes < 10){
-        SecondesPrint = "0" + Secondes;
+        if(Secondes == ""){
+            SecondesPrint = "00";
+        }
+        else{
+            SecondesPrint = "0" + Secondes;
+        }
     }
     else{
         SecondesPrint = Secondes;
@@ -62,12 +72,16 @@ setInterval(() => {
             minutes = 5;
             secondes = 0;
             travail = 0;
+            document.getElementById("Travail").classList.remove("actual");
+            document.getElementById("Pause").classList.toggle("actual");
         }
         if(minutes == 0 && heures == 0 && secondes == 0 && travail == 0){
             heures = 0;
             minutes = 25;
             secondes = 0;
             travail = 1;
+            document.getElementById("Pause").classList.remove("actual");
+            document.getElementById("Travail").classList.toggle("actual");
         }
         document.getElementById("timer").innerHTML = formatHour(heures, minutes, secondes, heuresPrint, minutesPrint, secondesPrint);
     }

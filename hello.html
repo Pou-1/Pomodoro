@@ -6,13 +6,29 @@
     </head>
     <body>
         <h1>TIMER POMODORO</h1>
-        
+        <div class="divTravailPause">
+            <p id="Travail" class="Travail actual">Travail</p>
+            <p id="Pause" class="Pause">Pause</p>
+        </div>
         <div class="time">
             <p id="timer" class="timer"></p>
             <div class="button-container">
                 <button id="stopTimer" class="yes stopTimer" onclick="functStopStartTimer()">Start</button>
             </div>
         </div>
+
+        <input type="number" id="TravailHeures" value="0">
+        <p> heures </p>
+        <input type="number" id="TravailMinutes" value="25">
+        <p> minutes </p>
+        <input type="number" id="TravailSecondes" value="0">
+        <p> secondes </p>
+        <input type="number" id="TravailHeures" value="0">
+        <p> heures </p>
+        <input type="number" id="TravailMinutes" value="25">
+        <p> minutes </p>
+        <input type="number" id="TravailSecondes" value="0">
+        <p> secondes </p>
     </body>
     <script src="script.js"></script>
 </html>
