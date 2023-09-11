@@ -1,3 +1,4 @@
+/*---------- variable ----------*/
 :root{
   --fontColor : rgb(255, 255, 255);
   --background : #ff0000;
@@ -9,15 +10,17 @@ body{
   color : var(--fontColor);
 }
 
-h1{
+/*---------- Title "TIMER POMODORO" ----------*/
+.FirstTitle{
   font-size: 60px;
 }
 
-
-#timer{
+/*---------- Size of number in the timer ----------*/
+.timer{
   font-size: 40px;
 }
 
+/*---------- Div of the timer ----------*/
 .time {
   margin: 0 auto;
   margin-top: 2%;
@@ -32,12 +35,14 @@ h1{
   font-weight: bold;
 }
 
+/*---------- Div for the button to be center ----------*/
 .button-container {
   display: flex;
   margin-top: 10px;
 }
 
-.stopTimer {
+/*---------- Button Start/Reset ----------*/
+.StartTimer {
   margin-right: 10px;
   padding: 10px 10px 10px 10px;
 }
@@ -95,11 +100,13 @@ input{
   width: 10%;
 }
 
+/*---------- Div for the inputs and <p> ----------*/
 .Temps p, input{
   font-size: 22px;
   display: inline;
 }
 
+/*---------- <p> of the mods "Travail" and "Pause" inside the modify option ----------*/
 .Titreactual{
   font-size: 40px;
 }
