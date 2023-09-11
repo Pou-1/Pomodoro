@@ -77,16 +77,14 @@ setInterval(() => {
             Minutes = document.getElementById("PauseMinutes").value;
             Secondes = document.getElementById("PauseSecondes").value;
             travail = 0;
-            document.getElementById("Travail").classList.remove("actual");
-            document.getElementById("Pause").classList.toggle("actual");
+            document.getElementById("Mod").innerText = "Pause";
         }
         if(Minutes == 0 && Hours == 0 && Secondes == 0 && travail == 0){
             Hours = document.getElementById("TravailHours").value;
             Minutes = document.getElementById("TravailMinutes").value;
             Secondes = document.getElementById("TravailSecondes").value;
             travail = 1;
-            document.getElementById("Pause").classList.remove("actual");
-            document.getElementById("Travail").classList.toggle("actual");
+            document.getElementById("Mod").innerText = "Travail";
         }
         document.getElementById("timer").innerHTML = formatHour(Hours, Minutes, Secondes, HoursPrint, MinutesPrint, secondesPrint);
     }
