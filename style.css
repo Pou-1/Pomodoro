@@ -72,16 +72,17 @@ button:hover {
 
 /*  Div with "Travail" and "Pause"  */
 .divTravailPause p{
-  font-size: 18px;
+  font-size: 2em;
   display: inline;
   margin-left: 5%;
   margin-right: 5%;
+  margin-bottom: 2%;
 }
 
 .divTravailPause{
   margin: 0 auto;
-  height: 22px;
-  width: 20%;
+  height: 40px;
+  width: 40%;
   border: 2px solid #ffffff;
   border-radius: 10px;
 }
@@ -94,21 +95,26 @@ button:hover {
 /*  Input for modify the time of the 2 mods  */
 input{
   -moz-appearance: textfield;
-  height: 25px;
-  font-size: 22px;
+  height: fit-content;
+  font-size: 2em;
   text-align: center;
   width: 10%;
 }
 
 /*---------- Div for the inputs and <p> ----------*/
 .Temps p, input{
-  font-size: 22px;
+  font-size: 2em;
   display: inline;
+}
+
+.Temps p{
+  font-weight: bold;
 }
 
 /*---------- <p> of the mods "Travail" and "Pause" inside the modify option ----------*/
 .Titreactual{
-  font-size: 40px;
+  font-size: 3em;
+  font-weight: bold;
 }
 
 .centre{
@@ -122,4 +128,8 @@ input{
 
 .visible{
   visibility: visible;
+}
+
+.Modify{
+  margin-bottom: 15%;
 }

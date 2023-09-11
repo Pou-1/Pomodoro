@@ -112,7 +112,7 @@ function functResetStartTimer(){
     }
     else{
         ResetStartTimer = 1;
-        document.getElementById("stopTimer").innerText = "Reset";
+        document.getElementById("stopTimer").innerText = "Réinitialiser";
     }
 }
 
