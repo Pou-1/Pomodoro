@@ -16,7 +16,6 @@ let StopStartTimer = 0;
 document.getElementById("timer").innerHTML = formatHour(heures, minutes, secondes);
 
 function formatHour(Heures, Minutes, Secondes, HeuresPrint, MinutesPrint, SecondesPrint) {
-    console.log(Heures);
     if(Heures < 10){
         if(Heures == ""){
             HeuresPrint = "00";
@@ -91,10 +90,22 @@ function functStopStartTimer(){
     if(StopStartTimer == 1){
         StopStartTimer = 0;
         document.getElementById("stopTimer").innerText = "Start";
+        if(travail == 1){
+            heures = document.getElementById("TravailHeures").value;
+            minutes = document.getElementById("TravailMinutes").value;
+            secondes = document.getElementById("TravailSecondes").value;
+            document.getElementById("timer").innerHTML = formatHour(heures, minutes, secondes, heuresPrint, minutesPrint, secondesPrint);
+        }
+        else{
+            heures = document.getElementById("PauseHeures").value;
+            minutes = document.getElementById("PauseMinutes").value;
+            secondes = document.getElementById("PauseSecondes").value;
+            document.getElementById("timer").innerHTML = formatHour(heures, minutes, secondes, heuresPrint, minutesPrint, secondesPrint);
+        }
     }
     else{
         StopStartTimer = 1;
-        document.getElementById("stopTimer").innerText = "Stop";
+        document.getElementById("stopTimer").innerText = "Reset";
     }
 }
 
@@ -144,7 +155,6 @@ document.getElementById("TravailHeures").addEventListener("change", (event) => {
 let modif = 0;
 
 function functModifTimer(){
-    console.log("Modif");
     if(modif == 0){
         document.getElementById("Modifier").classList.remove("hidden");
         document.getElementById("Modifier").classList.toggle("visible");
