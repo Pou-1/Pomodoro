@@ -5,6 +5,7 @@
 }
 
 body{
+  font-family: Ubuntu;
   text-align: center;
   background: var(--background);
   color : var(--fontColor);
@@ -99,6 +100,12 @@ input{
   font-size: 2em;
   text-align: center;
   width: 10%;
+  background-color: transparent;
+  border: 2px solid #ffffff;
+  border-radius: 5px;
+  color: #ffffff;
+  margin-right: 2%;
+  margin-left: 2%;
 }
 
 /*---------- Div for the inputs and <p> ----------*/
