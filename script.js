@@ -94,7 +94,7 @@ setInterval(() => {
 function functResetStartTimer(){
     if(ResetStartTimer == 1){
         ResetStartTimer = 0;
-        document.getElementById("stopTimer").innerText = "Start";
+        document.getElementById("stopTimer").innerText = "Lancer";
         if(travail == 1){
             Hours = document.getElementById("TravailHours").value;
             Minutes = document.getElementById("TravailMinutes").value;
