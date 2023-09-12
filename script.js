@@ -88,7 +88,7 @@ setInterval(() => {
         }
         document.getElementById("timer").innerHTML = formatHour(Hours, Minutes, Secondes, HoursPrint, MinutesPrint, secondesPrint);
     }
-}, 10);
+}, 1000);
 
 //---------- Link to Button in the timer, Start the timer or Reset and change value of timer link to the actual mod ----------\\
 function functResetStartTimer(){
