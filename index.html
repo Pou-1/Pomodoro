@@ -7,41 +7,69 @@
     </head>
     <body>
         <p class="FirstTitle">TIMER POMODORO</p>
-        <div class="divTravailPause">
-            <p id="Mod" class="Travail actual">Travail</p>
-        </div>
-        <div class="time">
-            <p id="timer" class="timer"></p>
-            <div class="button-container">
-                <button id="stopTimer" class="yes StartTimer" onclick="functResetStartTimer()">Lancer</button>
+        
+        <div class="Timer">
+           
+            <div class="divTravailPause">
+                <p id="Mod" class="bold">Travail</p>
+            </div>
+
+            <div class="time">
+                <div>
+                    <p id="timer" class="timer"></p>
+                    <button id="stopTimer" class="StartTimer">Lancer</button>
+                </div>
+            </div>
+
+            <div>
+                <button id="modifTimer" class="modifTimer padding">Modifier les temps</button>
+            </div>
+
+            <div id="Modifier" class="hidden Modify">
+
+                <div class="main-div">
+                    <div class="sub-div1" id="sub-div1">
+
+                        <p class="Titreactual ModifyTitle">Travail</p>
+                       
+                        <div id="Modifier2" class="Temps">
+                            <input type="number" id="TravailHours" value="0" max="60" min="0">
+                            <p>:</p>
+                            <input type="number" id="TravailMinutes" value="25" max="60" min="0">
+                            <p>:</p>
+                            <input type="number" id="TravailSecondes" value="0" max="60" min="0">
+                        </div>
+
+                        <div id="ClockDiv" class="ClockDiv">
+                            <canvas id="canvas" width="400" height="400"></canvas>
+                            <div id="clock-buttons"></div>
+                            <div id="DivLine" class="aa"></div>
+                        </div>
+                    </div>
+
+                    <div class="sub-div2" id="sub-div2">
+                        
+                        <p class="Titreactual ModifyTitle">Pause</p>
+
+                        <div id="Modifier4" class="Temps">
+                            <input type="number" id="PauseHours" value="0" max="60" min="0">
+                            <p>:</p>
+                            <input type="number" id="PauseMinutes" value="5" max="60" min="0">
+                            <p>:</p>
+                            <input type="number" id="PauseSecondes" value="0" max="60" min="0">
+                        </div>
+
+                        <div id="ClockDiv60" class="ClockDiv">
+                            <canvas id="canvas60" width="400" height="400"></canvas>
+                            <div id="clock-buttons60"></div>
+                            <div id="DivLine60" class="aa"></div>
+                        </div>
+                    </div>
+                </div>
+                <button id="modifTimer2" class="modifTimer2 padding">Modifier les temps</button>
             </div>
         </div>
 
-        <div class="centre">
-            <button id="modifTimer" class="modifTimer" onclick="functModifTimer()">Modifier les temps</button>
-        </div>
-
-        <div id="Modifier" class="hidden Modify">
-            <p id="Modifier1" class="Titreactual">Travail : </p>
-            <div id="Modifier2" class="Temps">
-                <input type="number" id="TravailHours" value="0">
-                <p> heures </p>
-                <input type="number" id="TravailMinutes" value="25">
-                <p> minutes </p>
-                <input type="number" id="TravailSecondes" value="0">
-                <p> secondes </p>
-            </div>
-
-            <p id="Modifier3" class="Titreactual">Pause : </p>
-            <div id="Modifier4" class="Temps">
-                 <input type="number" id="PauseHours" value="0">
-                <p> heures </p>
-                <input type="number" id="PauseMinutes" value="5">
-                <p> minutes </p>
-                <input type="number" id="PauseSecondes" value="0">
-                <p> secondes </p>
-            </div>
-        </div>
         <script src="script.js"></script>
     </body>
 </html>

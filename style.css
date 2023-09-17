@@ -1,7 +1,7 @@
 /*---------- variable ----------*/
 :root{
   --fontColor : rgb(255, 255, 255);
-  --background : #ff0000;
+  --background : rgb(59, 29, 55);
 }
 
 body{
@@ -9,24 +9,27 @@ body{
   text-align: center;
   background: var(--background);
   color : var(--fontColor);
+  height: 100%;
+  margin: 0;
 }
 
 /*---------- Title "TIMER POMODORO" ----------*/
 .FirstTitle{
   font-size: 60px;
+  margin: 30px;
 }
 
 /*---------- Size of number in the timer ----------*/
 .timer{
-  font-size: 40px;
+  font-size: 10vw;
 }
 
 /*---------- Div of the timer ----------*/
 .time {
   margin: 0 auto;
-  margin-top: 2%;
-  width: 300px;
-  height: 300px;
+  margin-top: 20px;
+  width: 65vw;
+  height: 65vw;
   border-radius: 50%;
   display: flex;
   flex-direction: column;
@@ -36,26 +39,32 @@ body{
   font-weight: bold;
 }
 
-/*---------- Div for the button to be center ----------*/
-.button-container {
-  display: flex;
-  margin-top: 10px;
-}
-
 /*---------- Button Start/Reset ----------*/
 .StartTimer {
-  margin-right: 10px;
-  padding: 10px 10px 10px 10px;
+  padding: 2% 10%;
+  font-size: 5vw;
+}
+
+/*---------- When screen width > 800px, change styles ----------*/
+@media screen and (min-width: 800px) {
+  .time {
+    width: 500px;
+    height: 500px;
+  }
+
+  .timer{
+    font-size: 80px;
+  }
+
+  .StartTimer {
+    font-size: 30px;
+  }
 }
 
 /*  Button  */
 button {
-  margin-top: 2%;
   border-radius: 5px;
   background-color: transparent;
-  width: fit-content;
-  height: fit-content;
-  padding: 2% 2% 2% 2%;
   text-align: center;
   -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
@@ -65,6 +74,10 @@ button {
   border: 2px solid #ffffff;
   cursor: pointer;
 }
+
+.padding{
+  padding: 2% 2% 2% 2%;
+}
   
 button:hover {
   background-color: #ffffff;
@@ -73,23 +86,28 @@ button:hover {
 
 /*  Div with "Travail" and "Pause"  */
 .divTravailPause p{
-  font-size: 2em;
+  font-size: 50px;
   display: inline;
-  margin-left: 5%;
-  margin-right: 5%;
-  margin-bottom: 2%;
 }
 
 .divTravailPause{
   margin: 0 auto;
-  height: 40px;
   width: 40%;
   border: 2px solid #ffffff;
   border-radius: 10px;
 }
 
-/*  Actual Mod ("Travail" or "Pause")  */
-.actual{
+/*---------- When screen width < 400px, change styles ----------*/
+@media screen and (max-width: 400px) {
+  .divTravailPause p{
+    font-size: 10vw;
+  }
+  .modifTimer{
+    font-size: 7vw;
+  }
+}
+
+.bold{
   font-weight: bold;
 }
 
@@ -97,25 +115,40 @@ button:hover {
 input{
   -moz-appearance: textfield;
   height: fit-content;
-  font-size: 2em;
-  text-align: center;
-  width: 10%;
   background-color: transparent;
-  border: 2px solid #ffffff;
-  border-radius: 5px;
-  color: #ffffff;
-  margin-right: 2%;
-  margin-left: 2%;
+  color : var(--fontColor);
+  border: none;
+  text-align: center;
+  width: 28%;
+  border-radius: 10px;
+}
+
+/* Style modify when input is focus */
+input:focus {
+  background-color: #d49218 !important;
+  outline: none !important;
 }
 
 /*---------- Div for the inputs and <p> ----------*/
 .Temps p, input{
-  font-size: 2em;
+  font-size: 3vw;
   display: inline;
 }
 
 .Temps p{
   font-weight: bold;
+}
+
+@media screen and (max-width: 650px) {
+  .Temps input {
+    width: 20% !important;
+  }
+  .FirstTitle{
+    font-size: 8vw;
+  }
+  .ModifyTitle{
+    font-size: 7vw !important;
+  }
 }
 
 /*---------- <p> of the mods "Travail" and "Pause" inside the modify option ----------*/
@@ -124,8 +157,13 @@ input{
   font-weight: bold;
 }
 
-.centre{
-  align-items: center;
+.modifTimer{
+  margin-top: 20px;
+}
+
+.modifTimer2{
+  width: 80%;
+  margin: 3%;
 }
 
 /*  Hide or Make visible the input with the button in JS */
@@ -138,5 +176,107 @@ input{
 }
 
 .Modify{
-  margin-bottom: 15%;
+  background: var(--background);
+  position: absolute; /* Position absolue pour superposer div 2 sur div 1 */
+  top: 0; /* Position verticale par rapport au conteneur */
+  left: 0; /* Position horizontale par rapport au conteneur */
+  width: 100%;
+  height: 100%;
+}
+
+/* Styles pour la div principale */
+.main-div {
+  width: 100%; /* La div principale prendra la largeur complète de son parent */
+  display: flex; /* Utilisez flexbox pour disposer les sous-divs côte à côte */
+}
+
+/* Styles pour les sous-divs */
+
+.sub-div1, .sub-div2{
+  flex: 1;
+  background-color: rgb(85, 38, 79);
+  align-items: center; /* Centre verticalement le contenu */
+  justify-content: center; /* Centre horizontalement le contenu */
+
+  border-radius: 10px;
+}
+
+.sub-div1 {
+  margin-left: 0.5%;
+  margin-right: 2%;
+}
+
+.sub-div2{
+  margin-right: 0.5%;
+}
+
+.Temps{
+  border-radius: 10px;
+  border: 2px solid #ffffff;
+  width: 80%;
+  margin-left: 10%;
+}
+
+/*Clock*/
+
+.clock-button {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: transparent;
+  color: white;
+  font-size: 22px;
+  line-height: 40px;
+  text-align: center;
+  cursor: pointer;
+  margin-top: 200px;
+  margin-left: 12.5%;
+}
+
+canvas {
+  width: 100%;
+  margin: auto;
+  height: 450px;
+  display: block;
+}
+
+
+.ClockDiv {
+  display: flex;
+  justify-content: center; /* Centrer horizontalement */
+  align-items: center; /* Centrer verticalement */
+  width: 100%; /* Pour occuper tout l'espace horizontal disponible */
+}
+
+
+.aa{
+  background-color: rgb(255, 255, 255);
+  margin-left: 48.5%;
+  margin-top: -65px;
+  position: absolute;
+  width: 13%;
+  height: 3px;
+  visibility: hidden;
+}
+
+.Timer{
+  position: relative;
+}
+
+.PauseModif{
+  margin-top: 400px;
+}
+
+.clock-button60 {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: transparent;
+  color: white;
+  font-size: 22px;
+  line-height: 40px;
+  text-align: center;
+  cursor: pointer;
+  margin-top: 200px;
+  margin-left: 63%;
 }
