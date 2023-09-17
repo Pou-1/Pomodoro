@@ -391,9 +391,18 @@ function drawClock(NumberStart, Number, Text, xM, yM, lM, tM) {
   }
 }
 
+let buttonClicked = "";
 document.getElementById("1clock-button0").addEventListener("click", (event) => {
     drawClock(1, 9, "", 0.55, 0.55, 0, 0);
-    console.log("1");
+    buttonClicked = "a";
+   });
+
+   document.getElementById("1clock-button1").addEventListener("click", (event) => {
+    drawClock(11, 19, "", 0.55, 0.55, 0, 0);
+   });
+
+   document.getElementById("1clock-button2").addEventListener("click", (event) => {
+    drawClock(21, 29, "", 0.55, 0.55, 0, 0);
    });
  
 /*

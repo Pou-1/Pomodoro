@@ -131,7 +131,7 @@ input:focus {
 
 /*---------- Div for the inputs and <p> ----------*/
 .Temps p, input{
-  font-size: 3vw;
+  font-size: 4.5vw;
   display: inline;
 }
 
@@ -139,7 +139,13 @@ input:focus {
   font-weight: bold;
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (min-width: 880px) {
+  .Temps p, input{
+    font-size: 50px;
+  }
+}
+
+@media screen and (max-width: 700px) {
   .Temps input {
     width: 20% !important;
   }
