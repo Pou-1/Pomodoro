@@ -404,6 +404,18 @@ document.getElementById("1clock-button0").addEventListener("click", (event) => {
    document.getElementById("1clock-button2").addEventListener("click", (event) => {
     drawClock(21, 29, "", 0.55, 0.55, 0, 0);
    });
+
+   document.getElementById("1clock-button3").addEventListener("click", (event) => {
+    drawClock(31, 39, "", 0.55, 0.55, 0, 0);
+   });
+
+   document.getElementById("1clock-button4").addEventListener("click", (event) => {
+    drawClock(41, 49, "", 0.55, 0.55, 0, 0);
+   });
+
+   document.getElementById("1clock-button5").addEventListener("click", (event) => {
+    drawClock(51, 59, "", 0.55, 0.55, 0, 0);
+   });
  
 /*
 document.getElementById("clock-button0Clock1").addEventListener("click", (event) => {
