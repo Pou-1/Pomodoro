@@ -359,12 +359,13 @@ radius60 = radius60 * 0.90;
 const buttonContainer60 = document.getElementById("clock-buttons60");
 
 // Appel de la fonction drawClock avec le nombre de boutons souhaité
-drawClock(0, 5, "0", 0.95, 0.95, 0, 0);
+drawClock(0, 0, 5, "0", 0.95, 0.95, 0, 0);
 
 let NumberOfClock = 0;
 
-function drawClock(NumberStart, Number, Text, xM, yM, lM, tM) {
-  //NumberOfClock++;
+function drawClock(NumberClock, NumberStart, Number, Text, xM, yM, lM, tM) {
+  //NumberOfClock = NumberOfClock + 1;
+  //console.log(NumberOfClock);
   let numPrint = 0; 
   for (let num = 0; num < (Number - NumberStart)+1; num++) {
     const button = document.createElement("button");
@@ -377,7 +378,7 @@ function drawClock(NumberStart, Number, Text, xM, yM, lM, tM) {
     }
     button.className = "clock-button60";
     //button.id = "clock-button" + numPrint + "Clock" + NumberOfClock;
-    button.id = "1clock-button" + numPrint;
+    button.id = NumberClock + "clock-button" + numPrint;
 
     const angle = ((num - 15) * (Math.PI * 2)) / ((Number - NumberStart)+1); // Position des boutons en fonction de l'angle
     const x = radius60  * xM * Math.cos(angle);
@@ -391,32 +392,55 @@ function drawClock(NumberStart, Number, Text, xM, yM, lM, tM) {
   }
 }
 
-let buttonClicked = "";
-document.getElementById("1clock-button0").addEventListener("click", (event) => {
-    drawClock(1, 9, "", 0.55, 0.55, 0, 0);
-    buttonClicked = "a";
+let NumberButtonClicked = -1;
+document.getElementById("0clock-button0").addEventListener("click", (event) => {
+    drawClock(1, 1, 9, "", 0.55, 0.55, 0, 0);
+    deleteClockButtons();
+    NumberButtonClicked = 0;
    });
 
-   document.getElementById("1clock-button1").addEventListener("click", (event) => {
-    drawClock(11, 19, "", 0.55, 0.55, 0, 0);
+   document.getElementById("0clock-button1").addEventListener("click", (event) => {
+    drawClock(1, 11, 19, "", 0.55, 0.55, 0, 0);
+    deleteClockButtons();
+    NumberButtonClicked = 10;
    });
 
-   document.getElementById("1clock-button2").addEventListener("click", (event) => {
-    drawClock(21, 29, "", 0.55, 0.55, 0, 0);
+   document.getElementById("0clock-button2").addEventListener("click", (event) => {
+    drawClock(1, 21, 29, "", 0.55, 0.55, 0, 0);
+    deleteClockButtons();
+    NumberButtonClicked = 20;
    });
 
-   document.getElementById("1clock-button3").addEventListener("click", (event) => {
-    drawClock(31, 39, "", 0.55, 0.55, 0, 0);
+   document.getElementById("0clock-button3").addEventListener("click", (event) => {
+    drawClock(1, 31, 39, "", 0.55, 0.55, 0, 0);
+    deleteClockButtons();
+    NumberButtonClicked = 30;
    });
 
-   document.getElementById("1clock-button4").addEventListener("click", (event) => {
-    drawClock(41, 49, "", 0.55, 0.55, 0, 0);
+   document.getElementById("0clock-button4").addEventListener("click", (event) => {
+    drawClock(1, 41, 49, "", 0.55, 0.55, 0, 0);
+    deleteClockButtons();
+    NumberButtonClicked = 40;
    });
 
-   document.getElementById("1clock-button5").addEventListener("click", (event) => {
-    drawClock(51, 59, "", 0.55, 0.55, 0, 0);
+   document.getElementById("0clock-button5").addEventListener("click", (event) => {
+    drawClock(1, 51, 59, "", 0.55, 0.55, 0, 0);
+    deleteClockButtons();
+    NumberButtonClicked = 50;
    });
  
+   function deleteClockButtons() {
+    if(NumberButtonClicked != -1){
+        console.log("START : " + NumberButtonClicked);
+        for(let i = (NumberButtonClicked + 1); i< (NumberButtonClicked + 10); i++){
+            let id = "1clock-button" + i;
+            console.log(id);
+            document.getElementById("clock-buttons60").removeChild(document.getElementById(id));
+        }
+    }
+}
+
+
 /*
 document.getElementById("clock-button0Clock1").addEventListener("click", (event) => {
    drawClock(10);
