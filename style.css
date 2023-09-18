@@ -84,6 +84,11 @@ button:hover {
   color: rgb(0, 0, 0);
 }
 
+.buttonSelect{
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+}
+
 /*  Div with "Travail" and "Pause"  */
 .divTravailPause p{
   font-size: 50px;

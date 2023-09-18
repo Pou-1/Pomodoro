@@ -131,45 +131,6 @@ function functResetStartTimer(){
 }
 
 //---------- Listener on all input ----------\\
-document.getElementById("modifTimer").addEventListener("click", (event) => {
-    functModifTimer();
-    if(travail == 1){
-        if(Hours != document.getElementById("TravailHours").value || Minutes != document.getElementById("TravailMinutes").value || Secondes != document.getElementById("TravailSecondes").value){
-            Hours = document.getElementById("TravailHours").value;
-            Minutes = document.getElementById("TravailMinutes").value;
-            Secondes = document.getElementById("TravailSecondes").value;
-            document.getElementById("timer").innerHTML = formatHour(Hours, Minutes, Secondes, HoursPrint, MinutesPrint, secondesPrint);
-        }
-    }
-    else{
-        if(Hours != document.getElementById("PauseHours").value || Minutes != document.getElementById("PauseMinutes").value || Secondes != document.getElementById("PauseSecondes").value){
-            Hours = document.getElementById("PauseHours").value;
-            Minutes = document.getElementById("PauseMinutes").value;
-            Secondes = document.getElementById("PauseSecondes").value;
-            document.getElementById("timer").innerHTML = formatHour(Hours, Minutes, Secondes, HoursPrint, MinutesPrint, secondesPrint);
-        }
-    }
-});
-
-document.getElementById("modifTimer2").addEventListener("click", (event) => {
-    functModifTimer();
-    if(travail == 1){
-        if(Hours != document.getElementById("TravailHours").value || Minutes != document.getElementById("TravailMinutes").value || Secondes != document.getElementById("TravailSecondes").value){
-            Hours = document.getElementById("TravailHours").value;
-            Minutes = document.getElementById("TravailMinutes").value;
-            Secondes = document.getElementById("TravailSecondes").value;
-            document.getElementById("timer").innerHTML = formatHour(Hours, Minutes, Secondes, HoursPrint, MinutesPrint, secondesPrint);
-        }
-    }
-    else{
-        if(Hours != document.getElementById("PauseHours").value || Minutes != document.getElementById("PauseMinutes").value || Secondes != document.getElementById("PauseSecondes").value){
-            Hours = document.getElementById("PauseHours").value;
-            Minutes = document.getElementById("PauseMinutes").value;
-            Secondes = document.getElementById("PauseSecondes").value;
-            document.getElementById("timer").innerHTML = formatHour(Hours, Minutes, Secondes, HoursPrint, MinutesPrint, secondesPrint);
-        }
-    }
-});
 
 document.getElementById("stopTimer").addEventListener("click", (event) => {
     functResetStartTimer();
@@ -198,9 +159,6 @@ function Verifyinput(value){
         if (value <= 0) {
             value = 0;
         }
-        if(value > 99999){
-            value = 99999
-        }
     } else {
         value = 0; // Si la valeur n'est pas un nombre, remplacez-la par 0
     }
@@ -218,10 +176,10 @@ document.getElementById("TravailMinutes").addEventListener("change", (event) => 
     let value = parseInt(event.target.value, 10);
     value = Verifyinput(value);
    
-    if(value > 60){
+    if(value >= 60){
         let aHours = Math.floor(value / 60);
-        if(parseInt(document.getElementById("TravailHours").value) + aHours >= 99999){
-            document.getElementById("TravailHours").value = 99999;
+        if(parseInt(document.getElementById("TravailHours").value) + aHours >= 10){
+            document.getElementById("TravailHours").value = 10;
         }else{
             document.getElementById("TravailHours").value = parseInt(document.getElementById("TravailHours").value) + aHours;
         }
@@ -234,13 +192,13 @@ document.getElementById("TravailSecondes").addEventListener("change", (event) =>
     let value = parseInt(event.target.value, 10);
     value = Verifyinput(value);
    
-    if(value > 60){
+    if(value >= 60){
         let aMinutes = Math.floor(value / 60);
 
-        if(aMinutes > 60){
+        if(aMinutes >= 60){
             let aHours = Math.floor(aMinutes / 60);
-            if(parseInt(document.getElementById("TravailHours").value) + aHours >= 99999){
-                document.getElementById("TravailHours").value = 99999;
+            if(parseInt(document.getElementById("TravailHours").value) + aHours >= 10){
+                document.getElementById("TravailHours").value = 10;
             }else{
                 document.getElementById("TravailHours").value = parseInt(document.getElementById("TravailHours").value) + aHours;
             }
@@ -265,8 +223,8 @@ document.getElementById("TravailSecondes").addEventListener("change", (event) =>
    
     if(value > 60){
         let aHours = Math.floor(value / 60);
-        if(parseInt(document.getElementById("PauseHours").value) + aHours >= 99999){
-            document.getElementById("PauseHours").value = 99999;
+        if(parseInt(document.getElementById("PauseHours").value) + aHours >= 10){
+            document.getElementById("PauseHours").value = 10;
         }else{
             document.getElementById("PauseHours").value = parseInt(document.getElementById("PauseHours").value) + aHours;
         }
@@ -284,8 +242,8 @@ document.getElementById("TravailSecondes").addEventListener("change", (event) =>
 
         if(aMinutes > 60){
             let aHours = Math.floor(aMinutes / 60);
-            if(parseInt(document.getElementById("PauseHours").value) + aHours >= 99999){
-                document.getElementById("PauseHours").value = 99999;
+            if(parseInt(document.getElementById("PauseHours").value) + aHours >= 10){
+                document.getElementById("PauseHours").value = 10;
             }else{
                 document.getElementById("PauseHours").value = parseInt(document.getElementById("PauseHours").value) + aHours;
             }
@@ -315,41 +273,6 @@ function functModifClock(){
     }
 }
 
-
-
-
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
-let radius = canvas.height / 2;
-ctx.translate(radius, radius);
-radius = radius * 0.90;
-
-const buttonContainer = document.getElementById("clock-buttons");
-
-drawNumbers();
-
-function drawNumbers() {
-    for (let num = 0; num < 10; num++) {
-        const button = document.createElement("button");
-        button.textContent = num.toString();
-        button.className = "clock-button";
-        
-        const angle = ((num - 15) * (Math.PI * 2)) / (10); // Position des boutons en fonction de l'angle
-        const x = radius * 0.75 * Math.cos(angle);
-        const y = radius * 0.75 * Math.sin(angle);
-        
-        button.style.position = "absolute";
-        button.style.left = (canvas.width / 2 + x) + "px"; // Ajustez la valeur pour centrer les boutons
-        button.style.top = (canvas.height / 2 + y - 30) + "px"; // Ajustez la valeur pour centrer les boutons
-        
-        button.addEventListener("click", () => {
-            alert("Button " + num + " clicked!");
-        });
-
-        buttonContainer.appendChild(button);
-    }
-}
-
 const canvas60 = document.getElementById("canvas60");
 const ctx60 = canvas60.getContext("2d");
 let radius60 = canvas60.height / 2;
@@ -358,14 +281,11 @@ radius60 = radius60 * 0.90;
 
 const buttonContainer60 = document.getElementById("clock-buttons60");
 
-// Appel de la fonction drawClock avec le nombre de boutons souhaité
-drawClock(0, 0, 5, "0", 0.95, 0.95, 0, 0);
-
 let NumberOfClock = 0;
 
 function drawClock(NumberClock, NumberStart, Number, Text, xM, yM, lM, tM) {
-  //NumberOfClock = NumberOfClock + 1;
-  //console.log(NumberOfClock);
+  NumberOfClock = NumberOfClock + 1;
+  console.log(NumberOfClock);
   let numPrint = 0; 
   for (let num = 0; num < (Number - NumberStart)+1; num++) {
     const button = document.createElement("button");
@@ -388,60 +308,122 @@ function drawClock(NumberClock, NumberStart, Number, Text, xM, yM, lM, tM) {
     button.style.left = ((canvas60.width / 2 + x) - lM) + "px";
     button.style.top = ((canvas60.height / 2 + y) - tM) + "px";
 
+    button.addEventListener("click", () => {
+        console.log("Button " + numPrint + " clicked!");
+    });
+
     buttonContainer60.appendChild(button);
   }
 }
 
 let NumberButtonClicked = -1;
-document.getElementById("0clock-button0").addEventListener("click", (event) => {
-    drawClock(1, 1, 9, "", 0.55, 0.55, 0, 0);
-    deleteClockButtons();
-    NumberButtonClicked = 0;
-   });
-
-   document.getElementById("0clock-button1").addEventListener("click", (event) => {
-    drawClock(1, 11, 19, "", 0.55, 0.55, 0, 0);
-    deleteClockButtons();
-    NumberButtonClicked = 10;
-   });
-
-   document.getElementById("0clock-button2").addEventListener("click", (event) => {
-    drawClock(1, 21, 29, "", 0.55, 0.55, 0, 0);
-    deleteClockButtons();
-    NumberButtonClicked = 20;
-   });
-
-   document.getElementById("0clock-button3").addEventListener("click", (event) => {
-    drawClock(1, 31, 39, "", 0.55, 0.55, 0, 0);
-    deleteClockButtons();
-    NumberButtonClicked = 30;
-   });
-
-   document.getElementById("0clock-button4").addEventListener("click", (event) => {
-    drawClock(1, 41, 49, "", 0.55, 0.55, 0, 0);
-    deleteClockButtons();
-    NumberButtonClicked = 40;
-   });
-
-   document.getElementById("0clock-button5").addEventListener("click", (event) => {
-    drawClock(1, 51, 59, "", 0.55, 0.55, 0, 0);
-    deleteClockButtons();
-    NumberButtonClicked = 50;
-   });
  
-   function deleteClockButtons() {
+function deleteClockButtons() {
     if(NumberButtonClicked != -1){
-        console.log("START : " + NumberButtonClicked);
+        //console.log("START : " + NumberButtonClicked);
         for(let i = (NumberButtonClicked + 1); i< (NumberButtonClicked + 10); i++){
             let id = "1clock-button" + i;
-            console.log(id);
+            //console.log(id);
             document.getElementById("clock-buttons60").removeChild(document.getElementById(id));
         }
     }
 }
 
+function CreateListenerButton(str, lM, xM){
+    let cmpt = 0;
+    for(let i = 1; i < 61; i = i + 10){
+        let strButton = str + cmpt;
+        //console.log(strButton);
 
-/*
-document.getElementById("clock-button0Clock1").addEventListener("click", (event) => {
-   drawClock(10);
-  });*/
+        cmpt = cmpt + 1;
+
+        document.getElementById(strButton).addEventListener("click", (event) => {
+            drawClock(1, i, (i+8), "", 0.55, 0.55, lM, xM);
+            deleteClockButtons();
+            NumberButtonClicked = (i - 1);
+        });
+    }
+}
+
+function drawNumbersHours() {
+    for (let num = 0; num < 13; num++) {
+        const button = document.createElement("button");
+        button.textContent = num.toString();
+        button.className = "clock-button";
+        
+        const angle = ((num - 15) * (Math.PI * 2)) / (13); // Position des boutons en fonction de l'angle
+        const x = radius60 * 0.75 * Math.cos(angle);
+        const y = radius60 * 0.75 * Math.sin(angle);
+        
+        button.style.position = "absolute";
+        button.style.left = ((canvas60.width / 2 + x) + 970) + "px";
+        button.style.top = ((canvas60.height / 2 + y) - 0) + "px";
+        
+        button.addEventListener("click", () => {
+            alert("Button " + num + " clicked!");
+        });
+
+        buttonContainer60.appendChild(button);
+    }
+}
+
+function DeletesButton(){
+    const parentElement = document.getElementById("clock-buttons60");
+    while (parentElement.firstChild) {
+        parentElement.removeChild(parentElement.firstChild);
+    }
+}
+
+  start();
+
+  function start(){
+    let strModiTimer = "";
+    let strInputListener = ["", "TravailHours", "TravailMinutes", "TravailSecondes", "PauseHours", "PauseMinutes", "PauseSecondes"];
+    for(let i = 1; i < 3; i++){
+        strModiTimer = "modifTimer" + i;
+        document.getElementById(strModiTimer).addEventListener("click", (event) => {
+            functModifTimer();
+            if(travail == 1){
+                if(Hours != document.getElementById("TravailHours").value || Minutes != document.getElementById("TravailMinutes").value || Secondes != document.getElementById("TravailSecondes").value){
+                    Hours = document.getElementById("TravailHours").value;
+                    Minutes = document.getElementById("TravailMinutes").value;
+                    Secondes = document.getElementById("TravailSecondes").value;
+                    document.getElementById("timer").innerHTML = formatHour(Hours, Minutes, Secondes, HoursPrint, MinutesPrint, secondesPrint);
+                }
+            }
+            else{
+                if(Hours != document.getElementById("PauseHours").value || Minutes != document.getElementById("PauseMinutes").value || Secondes != document.getElementById("PauseSecondes").value){
+                    Hours = document.getElementById("PauseHours").value;
+                    Minutes = document.getElementById("PauseMinutes").value;
+                    Secondes = document.getElementById("PauseSecondes").value;
+                    document.getElementById("timer").innerHTML = formatHour(Hours, Minutes, Secondes, HoursPrint, MinutesPrint, secondesPrint);
+                }
+            }
+            DeletesButton()
+        });
+    }
+    for(let i = 1; i < 7; i++){
+        document.getElementById(strInputListener[i]).addEventListener("click", (event) => {
+            DeletesButton();
+            if(i == 5 || i == 6){
+                drawClock(0, 0, 5, "0", 0.95, 0.95, 0, 0);
+                CreateListenerButton("0clock-button", 0, 0);
+            }
+            if(i == 2 || i == 3){
+                drawClock(0, 0, 5, "0", 0.95, 0.95, 970, 0);
+                CreateListenerButton("0clock-button", 970, 0);
+            }
+            if(i == 1 || i == 6){
+                document.getElementById(strInputListener[i]).addEventListener("click", (event) => {
+                    DeletesButton();
+                    if(i == 6){
+                        drawClock(0, 0, 12, "", 0.95, 0.95, 0, 0);
+                    }
+                    else{
+                        drawClock(0, 0, 12, "", 0.95, 0.95, 970, 0);
+                    }
+                });
+            }
+          });
+    }
+  }
