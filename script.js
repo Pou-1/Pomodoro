@@ -283,22 +283,6 @@ document.getElementById("TravailSecondes").addEventListener("change", (event) =>
     });
   
 
-
-let modifClockDiv = 0;
-
-function functModifClock(){
-    if(modifClockDiv == 0){
-        document.getElementById("ClockDiv").classList.remove("hidden");
-        document.getElementById("ClockDiv").classList.toggle("visible");
-        modifClockDiv = 1;
-    }
-    else{
-        document.getElementById("ClockDiv").classList.remove("visible");
-        document.getElementById("ClockDiv").classList.toggle("hidden");
-        modifClockDiv = 0;
-    }
-}
-
 const canvas60 = document.getElementById("canvas60");
 const ctx60 = canvas60.getContext("2d");
 let radius60 = canvas60.height / 2;

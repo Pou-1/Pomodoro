@@ -155,6 +155,14 @@ input:focus {
   .ModifyTitle{
     font-size: 7vw !important;
   }
+  .modifTimer2{
+    font-size: 20px !important;
+  }
+
+  .modifTimer{
+    width: 50% !important;
+    font-size: 15px !important;
+  }
 }
 
 /*---------- <p> of the mods "Travail" and "Pause" inside the modify option ----------*/
@@ -164,12 +172,15 @@ input:focus {
 }
 
 .modifTimer{
-  margin-top: 20px;
+  width: 29%;
+  margin: 3%;
+  font-size: 2vw;
 }
 
 .modifTimer2{
   width: 80%;
   margin: 3%;
+  font-size: 3vw;
 }
 
 /*  Hide or Make visible the input with the button in JS */
@@ -248,10 +259,10 @@ canvas {
 }
 
 .clock-button60 {
-  width: 4vw;
-  height: 4vw;
+  width: 3.3vw;
+  height: 3.3vw;
   border-radius: 50%;
-  font-size: 2vw;
+  font-size: 1.8vw;
   text-align: center;
   cursor: pointer;
   margin-top: 200px;
