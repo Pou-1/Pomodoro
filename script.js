@@ -183,6 +183,8 @@ function getHoursMinute(TimeMinutes){
     return [hours, minutes, 0];
 }
 
+let ActualInput = -1; // Actual Input focus
+
 document.getElementById("TravailHours").addEventListener("change", (event) => {
     // Récupère la valeur de l'input
     let value = parseInt(event.target.value, 10);
@@ -194,6 +196,8 @@ document.getElementById("TravailHours").addEventListener("change", (event) => {
         event.target.value = value;
     }
   });
+
+
 
 document.getElementById("TravailMinutes").addEventListener("change", (event) => {
     let value = parseInt(event.target.value, 10);
@@ -307,7 +311,7 @@ let NumberOfClock = 0;
 
 function drawClock(NumberClock, NumberStart, Number, Text, xM, yM, lM, tM) {
   NumberOfClock = NumberOfClock + 1;
-  console.log(NumberOfClock);
+  //console.log(NumberOfClock);
   let numPrint = 0; 
   for (let num = 0; num < (Number - NumberStart)+1; num++) {
     const button = document.createElement("button");
@@ -330,9 +334,65 @@ function drawClock(NumberClock, NumberStart, Number, Text, xM, yM, lM, tM) {
     button.style.left = ((canvas60.width / 2 + x) - lM) + "px";
     button.style.top = ((canvas60.height / 2 + y) - tM) + "px";
 
-    button.addEventListener("click", () => {
-        console.log("Button " + numPrint + " clicked!");
+
+    let NumInputButton = -1;
+    button.addEventListener("mouseout", () => {
+        document.getElementById(button.id).style.backgroundColor = "transparent";
+        document.getElementById(button.id).style.color = "#ffffff";
     });
+
+    button.addEventListener("mouseover", () => {
+        if(("0clock-button" + NumInputButton) != button.id){
+            console.log("0clock-button" + NumInputButton);
+            document.getElementById("0clock-button" + NumInputButton).style.backgroundColor = "transparent";
+            document.getElementById("0clock-button" + NumInputButton).style.color = "#ffffff";
+        }
+        console.log(num);
+        document.getElementById("TravailHours").value = num;
+        document.getElementById(button.id).style.backgroundColor = "#ffffff";
+        document.getElementById(button.id).style.color = "rgb(0, 0, 0)";
+    });
+
+    document.getElementById("TravailHours").addEventListener("input", (event) => {
+        NumInputButton = document.getElementById("TravailHours").value;
+        if(document.getElementById("TravailHours").value == num){
+            document.getElementById(button.id).style.backgroundColor = "#ffffff";
+            document.getElementById(button.id).style.color = "rgb(0, 0, 0)";
+        }
+        else{
+            document.getElementById(button.id).style.backgroundColor = "transparent";
+            document.getElementById(button.id).style.color = "#ffffff";
+        }
+        document.getElementById("TravailHours").style.backgroundColor = "#d49218";
+     });
+
+     document.getElementById("TravailHours").addEventListener("click", (event) => {
+        console.log("cclikkk");
+        NumInputButton = document.getElementById("TravailHours").value;
+        document.getElementById("TravailMinutes").style.backgroundColor = "transparent";
+        document.getElementById("TravailSecondes").style.backgroundColor = "transparent";
+       
+        if(document.getElementById("TravailHours").value == num){
+            document.getElementById(button.id).style.backgroundColor = "#ffffff";
+            document.getElementById(button.id).style.color = "rgb(0, 0, 0)";
+        }
+        else{
+            document.getElementById(button.id).style.backgroundColor = "transparent";
+            document.getElementById(button.id).style.color = "#ffffff";
+        }
+        document.getElementById("TravailHours").style.backgroundColor = "#d49218";
+     });
+
+     document.getElementById("TravailMinutes").addEventListener("click", (event) => {
+        document.getElementById("TravailHours").style.backgroundColor = "transparent";
+        document.getElementById("TravailSecondes").style.backgroundColor = "transparent";
+     });
+
+     
+     document.getElementById("TravailSecondes").addEventListener("click", (event) => {
+        document.getElementById("TravailHours").style.backgroundColor = "transparent";
+        document.getElementById("TravailMinutes").style.backgroundColor = "transparent";
+     });
 
     buttonContainer60.appendChild(button);
   }

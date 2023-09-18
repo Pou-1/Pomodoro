@@ -84,11 +84,6 @@ button:hover {
   color: rgb(0, 0, 0);
 }
 
-.buttonSelect{
-  background-color: #ffffff;
-  color: rgb(0, 0, 0);
-}
-
 /*  Div with "Travail" and "Pause"  */
 .divTravailPause p{
   font-size: 50px;
@@ -229,21 +224,6 @@ input:focus {
 }
 
 /*Clock*/
-
-.clock-button {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background-color: transparent;
-  color: white;
-  font-size: 22px;
-  line-height: 40px;
-  text-align: center;
-  cursor: pointer;
-  margin-top: 200px;
-  margin-left: 12.5%;
-}
-
 canvas {
   width: 100%;
   margin: auto;
@@ -259,17 +239,6 @@ canvas {
   width: 100%; /* Pour occuper tout l'espace horizontal disponible */
 }
 
-
-.aa{
-  background-color: rgb(255, 255, 255);
-  margin-left: 48.5%;
-  margin-top: -65px;
-  position: absolute;
-  width: 13%;
-  height: 3px;
-  visibility: hidden;
-}
-
 .Timer{
   position: relative;
 }
@@ -279,13 +248,10 @@ canvas {
 }
 
 .clock-button60 {
-  width: 60px;
-  height: 60px;
+  width: 4vw;
+  height: 4vw;
   border-radius: 50%;
-  background-color: transparent;
-  color: white;
-  font-size: 22px;
-  line-height: 40px;
+  font-size: 2vw;
   text-align: center;
   cursor: pointer;
   margin-top: 200px;
