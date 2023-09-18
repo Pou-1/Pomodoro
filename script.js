@@ -23,29 +23,29 @@ document.getElementById("timer").innerHTML = formatHour(Hours, Minutes, Secondes
 //---------- Format hour with zero in front if needed so it take 2 number ----------\\
 function formatHour(Hours, Minutes, Secondes, HoursPrint, MinutesPrint, SecondesPrint) {
     if(Hours < 10){
-        if(Hours == ""){
-            HoursPrint = "00";
+        if(Hours == 0){
+            HoursPrint = "";
         }
         else{
-            HoursPrint = "0" + Hours;
+            HoursPrint = "0" + Hours + " : ";
         }
     }
     else{
-        HoursPrint = Hours;
+        HoursPrint = Hours + " : ";
     }
     if(Minutes < 10){
-        if(Minutes == ""){
-            MinutesPrint = "00";
+        if(Minutes == 0 && Hours == 0){
+            MinutesPrint = "";
         }
         else{
-            MinutesPrint = "0" + Minutes;
+            MinutesPrint = "0" + Minutes + " : ";
         }
     }
     else{
-        MinutesPrint = Minutes;
+        MinutesPrint = Minutes + " : ";
     }
     if(Secondes < 10){
-        if(Secondes == ""){
+        if(Secondes == 0){
             SecondesPrint = "00";
         }
         else{
@@ -55,7 +55,7 @@ function formatHour(Hours, Minutes, Secondes, HoursPrint, MinutesPrint, Secondes
     else{
         SecondesPrint = Secondes;
     }
-    return HoursPrint + " : " + MinutesPrint + " : " + SecondesPrint;
+    return HoursPrint + MinutesPrint + SecondesPrint;
 }
 
 //---------- Permit time to pass in the timer ----------\\
@@ -165,11 +165,34 @@ function Verifyinput(value){
     return value;
 }
 
+function getMinutesSecondes(Time){
+    let TotalSecondes = Time[2];
+    let Minutes = Math.floor(TotalSecondes / 60);
+    let Secondes = TotalSecondes % 60;
+    
+    return [0, Minutes, Secondes];
+}
+
+function getHoursMinute(TimeMinutes){
+    let totalMinutes = TimeMinutes[1]; // Assuming Time[1] contains the total minutes
+    
+    // Calculate hours and remaining minutes
+    let hours = Math.floor(totalMinutes / 60); // 1 hour = 60 minutes
+    let minutes = totalMinutes % 60;
+    
+    return [hours, minutes, 0];
+}
+
 document.getElementById("TravailHours").addEventListener("change", (event) => {
     // Récupère la valeur de l'input
     let value = parseInt(event.target.value, 10);
     value = Verifyinput(value);
-    event.target.value = value;
+    if(value > 12){
+        event.target.value = 12;
+    }
+    else{
+        event.target.value = value;
+    }
   });
 
 document.getElementById("TravailMinutes").addEventListener("change", (event) => {
@@ -178,8 +201,8 @@ document.getElementById("TravailMinutes").addEventListener("change", (event) => 
    
     if(value >= 60){
         let aHours = Math.floor(value / 60);
-        if(parseInt(document.getElementById("TravailHours").value) + aHours >= 10){
-            document.getElementById("TravailHours").value = 10;
+        if(parseInt(document.getElementById("TravailHours").value) + aHours >= 12){
+            document.getElementById("TravailHours").value = 12;
         }else{
             document.getElementById("TravailHours").value = parseInt(document.getElementById("TravailHours").value) + aHours;
         }
@@ -191,24 +214,23 @@ document.getElementById("TravailMinutes").addEventListener("change", (event) => 
 document.getElementById("TravailSecondes").addEventListener("change", (event) => {
     let value = parseInt(event.target.value, 10);
     value = Verifyinput(value);
-   
-    if(value >= 60){
-        let aMinutes = Math.floor(value / 60);
+    
+    ActualSecondes = (parseInt(document.getElementById("TravailMinutes").value, 10)) * 60;
+    ActualSecondes = ActualSecondes + (parseInt(document.getElementById("TravailHours").value, 10) * 3600);
+    ActualSecondes = ActualSecondes + value;
 
-        if(aMinutes >= 60){
-            let aHours = Math.floor(aMinutes / 60);
-            if(parseInt(document.getElementById("TravailHours").value) + aHours >= 10){
-                document.getElementById("TravailHours").value = 10;
-            }else{
-                document.getElementById("TravailHours").value = parseInt(document.getElementById("TravailHours").value) + aHours;
-            }
-            aMinutes = aMinutes%60;
-        }
+    let Time = [0, 0, ActualSecondes];
+    let Time2 = getMinutesSecondes(Time);
+    let Time3 = getHoursMinute([0, Time2[1], 0]);
 
-        document.getElementById("TravailMinutes").value = parseInt(document.getElementById("TravailMinutes").value) + aMinutes;
-        value = value%60;
+    if(Time3[0] > 12){
+        Time3[0] = 12;
+        Time3[1] = 59;
+        Time2[2] = 59;
     }
-    event.target.value = value;
+    event.target.value = Time2[2];
+    document.getElementById("TravailHours").value = Time3[0];
+    document.getElementById("TravailMinutes").value = Time3[1];
   });
 
   document.getElementById("PauseHours").addEventListener("change", (event) => {
@@ -413,10 +435,10 @@ function DeletesButton(){
                 drawClock(0, 0, 5, "0", 0.95, 0.95, 970, 0);
                 CreateListenerButton("0clock-button", 970, 0);
             }
-            if(i == 1 || i == 6){
+            if(i == 1 || i == 4){
                 document.getElementById(strInputListener[i]).addEventListener("click", (event) => {
                     DeletesButton();
-                    if(i == 6){
+                    if(i == 4){
                         drawClock(0, 0, 12, "", 0.95, 0.95, 0, 0);
                     }
                     else{
@@ -424,6 +446,6 @@ function DeletesButton(){
                     }
                 });
             }
-          });
+        });
     }
   }
