@@ -41,8 +41,27 @@ body{
 
 /*---------- Button Start/Reset ----------*/
 .StartTimer {
-  padding: 2% 10%;
   font-size: 5vw;
+  border-radius: 50%;
+  width: 15vw;
+  height: 15vw;
+}
+
+main {
+  margin-bottom: 20px;
+}
+
+footer {
+  background-color: rgb(51, 22, 47);
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  padding-bottom: auto;
+}
+
+.keyboardLogo{
+  font-size: 80px;
+  margin-bottom: 30px;
 }
 
 /*---------- When screen width > 800px, change styles ----------*/
@@ -58,6 +77,12 @@ body{
 
   .StartTimer {
     font-size: 30px;
+    width: 100px;
+    height: 100px;
+  }
+
+  .copyright{
+    font-size: 20px;
   }
 }
 
@@ -163,24 +188,39 @@ input:focus {
     width: 50% !important;
     font-size: 15px !important;
   }
+
+  .keyboardLogo{
+    font-size: 10vw !important;
+  }
+  
+  footer{
+    font-size: 3vw !important;
+  }
 }
 
 /*---------- <p> of the mods "Travail" and "Pause" inside the modify option ----------*/
 .Titreactual{
-  font-size: 3em;
+  font-size: 5em;
   font-weight: bold;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 .modifTimer{
   width: 29%;
-  margin: 3%;
-  font-size: 2vw;
+  margin: 2.3%;
+  font-size: 1.7vw;
+}
+
+.ModifTimerButtonDiv{
+  margin: 0;
 }
 
 .modifTimer2{
-  width: 80%;
-  margin: 3%;
-  font-size: 3vw;
+  width: 96%;
+  margin: 1%;
+  font-size: 2.5vw;
+  padding: 1.2%;
 }
 
 /*  Hide or Make visible the input with the button in JS */

@@ -3,67 +3,80 @@
     <head>
         <meta charset="UTF-8">
         <title>POMODORO</title>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="style/style.css">
+        <script src="https://kit.fontawesome.com/8708952b61.js" crossorigin="anonymous"></script>
     </head>
     <body>
-        <p class="FirstTitle">TIMER POMODORO</p>
-        
-        <div class="Timer">
-           
-            <div class="divTravailPause">
-                <p id="Mod" class="bold">Travail</p>
-            </div>
-
-            <div class="time">
-                <div>
-                    <p id="timer" class="timer"></p>
-                    <button id="stopTimer" class="StartTimer">Lancer</button>
+        <main>
+            <p class="FirstTitle">TIMER POMODORO</p>
+            
+            <div class="Timer">
+            
+                <div class="divTravailPause">
+                    <p id="Mod" class="bold">Travail</p>
                 </div>
-            </div>
 
-            <div>
-                <button id="modifTimer1" class="modifTimer padding">Modifier les temps</button>
-            </div>
-
-            <div id="Modifier" class="hidden Modify">
-
-                <div class="main-div">
-                    <div class="sub-div1" id="sub-div1">
-
-                        <p class="Titreactual ModifyTitle">Travail</p>
-                       
-                        <div id="Modifier2" class="Temps">
-                            <input type="number" id="TravailHours" value="0" max="60" min="0">
-                            <p>:</p>
-                            <input type="number" id="TravailMinutes" value="25" max="60" min="0">
-                            <p>:</p>
-                            <input type="number" id="TravailSecondes" value="0" max="60" min="0">
-                        </div>
-
+                
+                <div class="time">
+                    <div>
+                        <p id="timer" class="timer"></p>
+                        <button id="stopTimer" class="StartTimer"><i class="fa-solid fa-play"></i></button>
                     </div>
+                </div>
 
-                    <div class="sub-div2" id="sub-div2">
+                <div class="ModifTimerButtonDiv">
+                    <button id="modifTimer1" class="modifTimer padding">Modifier les temps</button>
+                </div>
+
+                <footer>
+                    <a class="copyright">© 2023 Cyprien De La Poêze D'Harambure 2ème Année IUT Campus 3 Ifs France</a>
+                </footer>
+
+                <div id="Modifier" class="hidden Modify">
+
+                    <div class="main-div">
+                        <div class="sub-div1" id="sub-div1">
+
+                            <p class="Titreactual ModifyTitle">Travail</p>
+                            <i class="fa-regular fa-keyboard keyboardLogo"></i>
                         
-                        <p class="Titreactual ModifyTitle">Pause</p>
+                            <div id="Modifier2" class="Temps">
+                                <input type="number" id="TravailHours" value="0" max="60" min="0">
+                                <p>:</p>
+                                <input type="number" id="TravailMinutes" value="25" max="60" min="0">
+                                <p>:</p>
+                                <input type="number" id="TravailSecondes" value="0" max="60" min="0">
+                            </div>
 
-                        <div id="Modifier4" class="Temps">
-                            <input type="number" id="PauseHours" value="0" max="60" min="0">
-                            <p>:</p>
-                            <input type="number" id="PauseMinutes" value="5" max="60" min="0">
-                            <p>:</p>
-                            <input type="number" id="PauseSecondes" value="0" max="60" min="0">
                         </div>
 
-                        <div id="ClockDiv60" class="ClockDiv">
-                            <canvas id="canvas60" width="400" height="400"></canvas>
-                            <div id="clock-buttons60"></div>
+                        <div class="sub-div2" id="sub-div2">
+                            
+                            <p class="Titreactual ModifyTitle">Pause</p>
+                            <i class="fa-regular fa-keyboard keyboardLogo"></i>
+
+                            <div id="Modifier4" class="Temps">
+                                <input type="number" id="PauseHours" value="0" max="60" min="0">
+                                <p>:</p>
+                                <input type="number" id="PauseMinutes" value="5" max="60" min="0">
+                                <p>:</p>
+                                <input type="number" id="PauseSecondes" value="0" max="60" min="0">
+                            </div>
+
+                            <div id="ClockDiv60" class="ClockDiv">
+                                <canvas id="canvas60" width="400" height="400"></canvas>
+                                <div id="clock-buttons60"></div>
+                            </div>
                         </div>
                     </div>
+                    <button id="modifTimer2" class="modifTimer2">Modifier les temps</button>
+                    <footer>
+                        <a class="copyright">© 2023 Cyprien De La Poêze D'Harambure 2ème Année IUT Campus 3 Ifs France</a>
+                    </footer>
                 </div>
-                <button id="modifTimer2" class="modifTimer2 padding">Modifier les temps</button>
             </div>
-        </div>
+        </main>
 
-        <script src="script.js"></script>
+        <script src="script/script.js"></script>
     </body>
 </html>

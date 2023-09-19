@@ -17,6 +17,23 @@ let travail = 1;
 //---------- Variable that give the status of the timer between "Reset" and "Start" ----------\\
 let ResetStartTimer = 0;
 
+//---------- Variable that give the status of the page between "Timer" and "Modif Timer" ----------\\
+let modif = 0;
+
+let ActualInput = -1; // Actual Input focus
+
+const canvas60 = document.getElementById("canvas60");
+const ctx60 = canvas60.getContext("2d");
+let radius60 = canvas60.height / 2;
+ctx60.translate(radius60, radius60);
+radius60 = radius60 * 0.90;
+
+const buttonContainer60 = document.getElementById("clock-buttons60");
+
+let NumberOfClock = 0;
+
+let NumberButtonClicked = -1;
+
 //---------- Format hour and place it in the timer ----------\\
 document.getElementById("timer").innerHTML = formatHour(Hours, Minutes, Secondes);
 
@@ -110,7 +127,13 @@ function ChangementTravail(){
 function functResetStartTimer(){
     if(ResetStartTimer == 1){
         ResetStartTimer = 0;
-        document.getElementById("stopTimer").innerText = "Lancer";
+        
+        const button = document.getElementById("stopTimer");
+        const playIcon = document.createElement("i");
+        playIcon.className = "fa-solid fa-play LogoPlay";
+        button.innerHTML = '';
+        button.appendChild(playIcon);
+
         if(travail == 1){
             Hours = document.getElementById("TravailHours").value;
             Minutes = document.getElementById("TravailMinutes").value;
@@ -126,19 +149,21 @@ function functResetStartTimer(){
     }
     else{
         ResetStartTimer = 1;
-        document.getElementById("stopTimer").innerText = "Réinitialiser";
+        
+        const button = document.getElementById("stopTimer");
+        const squareIcon = document.createElement("i");
+        squareIcon.className = "fa-solid fa-square LogoPlay";
+        button.innerHTML = '';
+        button.appendChild(squareIcon);
     }
 }
 
 //---------- Listener on all input ----------\\
-
 document.getElementById("stopTimer").addEventListener("click", (event) => {
     functResetStartTimer();
 });
 
 //---------- Hide or make visible the inputs to modify the timer ----------\\
-let modif = 0;
-
 function functModifTimer(){
     if(modif == 0){
         document.getElementById("Modifier").classList.remove("hidden");
@@ -183,10 +208,8 @@ function getHoursMinute(TimeMinutes){
     return [hours, minutes, 0];
 }
 
-let ActualInput = -1; // Actual Input focus
 
 document.getElementById("TravailHours").addEventListener("change", (event) => {
-    // Récupère la valeur de l'input
     let value = parseInt(event.target.value, 10);
     value = Verifyinput(value);
     if(value > 12){
@@ -196,8 +219,6 @@ document.getElementById("TravailHours").addEventListener("change", (event) => {
         event.target.value = value;
     }
   });
-
-
 
 document.getElementById("TravailMinutes").addEventListener("change", (event) => {
     let value = parseInt(event.target.value, 10);
@@ -240,17 +261,22 @@ document.getElementById("TravailSecondes").addEventListener("change", (event) =>
   document.getElementById("PauseHours").addEventListener("change", (event) => {
     let value = parseInt(event.target.value, 10);
     value = Verifyinput(value);
-    event.target.value = value;
-    });
+    if(value > 12){
+        event.target.value = 12;
+    }
+    else{
+        event.target.value = value;
+    }
+  });
 
   document.getElementById("PauseMinutes").addEventListener("change", (event) => {
     let value = parseInt(event.target.value, 10);
     value = Verifyinput(value);
    
-    if(value > 60){
+    if(value >= 60){
         let aHours = Math.floor(value / 60);
-        if(parseInt(document.getElementById("PauseHours").value) + aHours >= 10){
-            document.getElementById("PauseHours").value = 10;
+        if(parseInt(document.getElementById("PauseHours").value) + aHours >= 12){
+            document.getElementById("PauseHours").value = 12;
         }else{
             document.getElementById("PauseHours").value = parseInt(document.getElementById("PauseHours").value) + aHours;
         }
@@ -262,36 +288,24 @@ document.getElementById("TravailSecondes").addEventListener("change", (event) =>
   document.getElementById("PauseSecondes").addEventListener("change", (event) => {
     let value = parseInt(event.target.value, 10);
     value = Verifyinput(value);
-   
-    if(value > 60){
-        let aMinutes = Math.floor(value / 60);
+    
+    ActualSecondes = (parseInt(document.getElementById("PauseMinutes").value, 10)) * 60;
+    ActualSecondes = ActualSecondes + (parseInt(document.getElementById("PauseHours").value, 10) * 3600);
+    ActualSecondes = ActualSecondes + value;
 
-        if(aMinutes > 60){
-            let aHours = Math.floor(aMinutes / 60);
-            if(parseInt(document.getElementById("PauseHours").value) + aHours >= 10){
-                document.getElementById("PauseHours").value = 10;
-            }else{
-                document.getElementById("PauseHours").value = parseInt(document.getElementById("PauseHours").value) + aHours;
-            }
-            aMinutes = aMinutes%60;
-        }
+    let Time = [0, 0, ActualSecondes];
+    let Time2 = getMinutesSecondes(Time);
+    let Time3 = getHoursMinute([0, Time2[1], 0]);
 
-        document.getElementById("PauseMinutes").value = parseInt(document.getElementById("PauseMinutes").value) + aMinutes;
-        value = value%60;
+    if(Time3[0] > 12){
+        Time3[0] = 12;
+        Time3[1] = 59;
+        Time2[2] = 59;
     }
-    event.target.value = value;
+    event.target.value = Time2[2];
+    document.getElementById("PauseHours").value = Time3[0];
+    document.getElementById("PauseMinutes").value = Time3[1];
     });
-  
-
-const canvas60 = document.getElementById("canvas60");
-const ctx60 = canvas60.getContext("2d");
-let radius60 = canvas60.height / 2;
-ctx60.translate(radius60, radius60);
-radius60 = radius60 * 0.90;
-
-const buttonContainer60 = document.getElementById("clock-buttons60");
-
-let NumberOfClock = 0;
 
 function drawClock(NumberClock, NumberStart, Number, Text, xM, yM, lM, tM) {
   NumberOfClock = NumberOfClock + 1;
@@ -316,74 +330,71 @@ function drawClock(NumberClock, NumberStart, Number, Text, xM, yM, lM, tM) {
 
     button.style.position = "absolute";
     button.style.left = ((canvas60.width / 2 + x) - lM) + "px";
-    button.style.top = ((canvas60.height / 2 + y) - tM) + "px";
+    button.style.top = ((canvas60.height / 2 + y) + 80) + "px";
 
 
     let NumInputButton = -1;
-    button.addEventListener("mouseout", () => {
-        document.getElementById(button.id).style.backgroundColor = "transparent";
-        document.getElementById(button.id).style.color = "#ffffff";
-    });
 
     button.addEventListener("mouseover", () => {
-        if(("0clock-button" + NumInputButton) != button.id){
-            console.log("0clock-button" + NumInputButton);
-            document.getElementById("0clock-button" + NumInputButton).style.backgroundColor = "transparent";
-            document.getElementById("0clock-button" + NumInputButton).style.color = "#ffffff";
-        }
-        console.log(num);
+        NumInputButton = document.getElementById("TravailHours").value;
+
+        document.getElementById("0clock-button" + NumInputButton).style.backgroundColor = "transparent";
+        document.getElementById("0clock-button" + NumInputButton).style.color = "#ffffff";
+
         document.getElementById("TravailHours").value = num;
         document.getElementById(button.id).style.backgroundColor = "#ffffff";
         document.getElementById(button.id).style.color = "rgb(0, 0, 0)";
     });
 
-    document.getElementById("TravailHours").addEventListener("input", (event) => {
-        NumInputButton = document.getElementById("TravailHours").value;
-        if(document.getElementById("TravailHours").value == num){
-            document.getElementById(button.id).style.backgroundColor = "#ffffff";
-            document.getElementById(button.id).style.color = "rgb(0, 0, 0)";
-        }
-        else{
-            document.getElementById(button.id).style.backgroundColor = "transparent";
-            document.getElementById(button.id).style.color = "#ffffff";
-        }
-        document.getElementById("TravailHours").style.backgroundColor = "#d49218";
-     });
-
      document.getElementById("TravailHours").addEventListener("click", (event) => {
-        console.log("cclikkk");
         NumInputButton = document.getElementById("TravailHours").value;
-        document.getElementById("TravailMinutes").style.backgroundColor = "transparent";
-        document.getElementById("TravailSecondes").style.backgroundColor = "transparent";
-       
-        if(document.getElementById("TravailHours").value == num){
-            document.getElementById(button.id).style.backgroundColor = "#ffffff";
-            document.getElementById(button.id).style.color = "rgb(0, 0, 0)";
-        }
-        else{
-            document.getElementById(button.id).style.backgroundColor = "transparent";
-            document.getElementById(button.id).style.color = "#ffffff";
-        }
-        document.getElementById("TravailHours").style.backgroundColor = "#d49218";
-     });
-
-     document.getElementById("TravailMinutes").addEventListener("click", (event) => {
-        document.getElementById("TravailHours").style.backgroundColor = "transparent";
-        document.getElementById("TravailSecondes").style.backgroundColor = "transparent";
-     });
-
-     
-     document.getElementById("TravailSecondes").addEventListener("click", (event) => {
-        document.getElementById("TravailHours").style.backgroundColor = "transparent";
-        document.getElementById("TravailMinutes").style.backgroundColor = "transparent";
      });
 
     buttonContainer60.appendChild(button);
   }
 }
 
-let NumberButtonClicked = -1;
+let PrecedentValueInput = -1;
+
+document.getElementById("TravailHours").addEventListener("click", (event) => {
+    document.getElementById("TravailHours").style.backgroundColor = "#d49218";
+
+    document.getElementById("TravailMinutes").style.backgroundColor = "transparent";
+    document.getElementById("TravailSecondes").style.backgroundColor = "transparent";
+});
+
+document.getElementById("TravailHours").addEventListener("input", (event) => {
+    
+    document.getElementById("0clock-button" + PrecedentValueInput).style.backgroundColor = "transparent";
+    document.getElementById("0clock-button" + PrecedentValueInput).style.color = "#ffffff";
+
+    let numNewButton = document.getElementById("TravailHours").value;
+
+    numNewButton = Verifyinput(numNewButton);
+    if(numNewButton > 12){
+        numNewButton = 12;
+    }
+    if(Number.isNaN(numNewButton)){
+        numNewButton = 0;
+    }
+    //console.log(numNewButton);
+
+    document.getElementById("0clock-button" + numNewButton).style.backgroundColor = "#ffffff";
+    document.getElementById("0clock-button" + numNewButton).style.color = "rgb(0, 0, 0)";
+
+    PrecedentValueInput = numNewButton;
+ });
  
+ document.getElementById("TravailMinutes").addEventListener("click", (event) => {
+    document.getElementById("TravailHours").style.backgroundColor = "transparent";
+    document.getElementById("TravailSecondes").style.backgroundColor = "transparent";
+ });
+ 
+ document.getElementById("TravailSecondes").addEventListener("click", (event) => {
+    document.getElementById("TravailHours").style.backgroundColor = "transparent";
+    document.getElementById("TravailMinutes").style.backgroundColor = "transparent";
+ });
+
 function deleteClockButtons() {
     if(NumberButtonClicked != -1){
         //console.log("START : " + NumberButtonClicked);
@@ -395,6 +406,7 @@ function deleteClockButtons() {
     }
 }
 
+/* Create a Listener on button to draw a little clock on click, permit to create a 60 min clock */
 function CreateListenerButton(str, lM, xM){
     let cmpt = 0;
     for(let i = 1; i < 61; i = i + 10){
@@ -411,28 +423,7 @@ function CreateListenerButton(str, lM, xM){
     }
 }
 
-function drawNumbersHours() {
-    for (let num = 0; num < 13; num++) {
-        const button = document.createElement("button");
-        button.textContent = num.toString();
-        button.className = "clock-button";
-        
-        const angle = ((num - 15) * (Math.PI * 2)) / (13); // Position des boutons en fonction de l'angle
-        const x = radius60 * 0.75 * Math.cos(angle);
-        const y = radius60 * 0.75 * Math.sin(angle);
-        
-        button.style.position = "absolute";
-        button.style.left = ((canvas60.width / 2 + x) + 970) + "px";
-        button.style.top = ((canvas60.height / 2 + y) - 0) + "px";
-        
-        button.addEventListener("click", () => {
-            alert("Button " + num + " clicked!");
-        });
-
-        buttonContainer60.appendChild(button);
-    }
-}
-
+/* Delete all buttons */
 function DeletesButton(){
     const parentElement = document.getElementById("clock-buttons60");
     while (parentElement.firstChild) {
@@ -440,9 +431,9 @@ function DeletesButton(){
     }
 }
 
-  start();
+start();
 
-  function start(){
+function start(){
     let strModiTimer = "";
     let strInputListener = ["", "TravailHours", "TravailMinutes", "TravailSecondes", "PauseHours", "PauseMinutes", "PauseSecondes"];
     for(let i = 1; i < 3; i++){
@@ -480,16 +471,18 @@ function DeletesButton(){
                 CreateListenerButton("0clock-button", 970, 0);
             }
             if(i == 1 || i == 4){
-                document.getElementById(strInputListener[i]).addEventListener("click", (event) => {
-                    DeletesButton();
-                    if(i == 4){
-                        drawClock(0, 0, 12, "", 0.95, 0.95, 0, 0);
-                    }
-                    else{
-                        drawClock(0, 0, 12, "", 0.95, 0.95, 970, 0);
-                    }
-                });
+                if(i == 4){
+                    drawClock(0, 0, 12, "", 0.95, 0.95, 0, 0);
+                }
+                else{
+                    drawClock(0, 0, 12, "", 0.95, 0.95, 970, 0);
+
+                    PrecedentValueInput = document.getElementById("TravailHours").value;
+
+                    document.getElementById("0clock-button" + PrecedentValueInput).style.backgroundColor = "#ffffff";
+                    document.getElementById("0clock-button" + PrecedentValueInput).style.color = "rgb(0, 0, 0)";
+                }
             }
         });
     }
-  }
+}
