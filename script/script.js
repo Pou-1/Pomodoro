@@ -92,7 +92,7 @@ function ChangementPause(){
     document.getElementById("footer").style.backgroundColor = "rgb(22, 70, 121)";
     document.getElementById("footer1").style.backgroundColor = "rgb(22, 70, 121)";
     changeInputBackground();
-    document.getElementById("ActualTimerModBetweenWorkBreak").innerText = "Pause";
+    document.getElementById("ActualTimerModBetweenWorkBreak").innerText = "Break";
 }
 
 function ChangementTravail(){
@@ -104,7 +104,7 @@ function ChangementTravail(){
     changeInputBackground();
     document.getElementById("footer").style.backgroundColor = "rgb(51, 22, 47)";
     document.getElementById("footer1").style.backgroundColor = "rgb(51, 22, 47)";
-    document.getElementById("ActualTimerModBetweenWorkBreak").innerText = "Travail";
+    document.getElementById("ActualTimerModBetweenWorkBreak").innerText = "Work";
 }
 
 //---------- Link to Button in the timer, Start the timer or Reset and change value of timer link to the actual mod ----------\\

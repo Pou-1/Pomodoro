@@ -1,47 +1,47 @@
-# 🍅 Chronomètre Pomodoro Web 🕒
+# 🍅 Pomodoro Web Timer 🕒
 
-Bienvenue dans l'application Web du chronomètre Pomodoro ! 🚀
+Welcome to the Pomodoro Web Timer application! 🚀
 
-## Qu'est-ce que c'est ❓
+## What is it ❓
 
-Ce chronomètre est conçu pour vous aider à rester concentré et à gérer efficacement votre temps de travail en utilisant la méthode Pomodoro. Il vous permet de définir des périodes de travail et de pause, puis de lancer et de réinitialiser le timer en fonction de vos besoins. C'est un outil simple, mais efficace, pour améliorer votre productivité.
+This timer is designed to help you stay focused and manage your work time effectively using the Pomodoro method. It allows you to set work and break periods, start and reset the timer as needed. It's a simple yet effective tool to boost your productivity.
 
-## Fonctionnalités ✨
+## Features ✨
 
-- ⏳ Réglez la durée de votre période de travail et de votre pause à l'aide d'inputs conviviaux.
-- ▶️ Lancez le timer pour commencer votre session de travail.
-- 🔄 Réinitialisez le timer à tout moment pour recommencer votre session.
-- 📈 Suivez votre progression et restez concentré grâce à la méthode Pomodoro.
+- ⏳ Set the duration of your work and break periods with user-friendly inputs.
+- ▶️ Start the timer to begin your work session.
+- 🔄 Reset the timer at any time to start your session over.
+- 📈 Track your progress and stay focused with the Pomodoro method.
 
-## Comment utiliser l'application 📝
+## How to use the application 📝
 
-1. Ouvrez l'application dans votre navigateur Web préféré.
+1. **Open the application** in your favorite web browser.
 
-2. Utilisez les inputs pour définir la durée de votre période de travail (par exemple, 25 minutes) et la durée de votre pause (par exemple, 5 minutes).
+2. Use the inputs to **set the duration** of your work period (e.g., 25 minutes) and break period (e.g., 5 minutes).
 
-3. Cliquez sur le bouton en flèche pour lancer le timer. Vous pouvez également cliquer sur le carré à tout moment pour recommencer votre session.
+3. Click the **arrow button** to start the timer. You can also click the square at any time to restart your session.
 
-4. Pendant la période de travail, travaillez intensément sur votre tâche.
+4. During the work period, **focus intensely** on your task.
 
-5. Lorsque le timer atteint zéro, la couleur de l'écran vous indiquera de prendre une pause. Profitez de votre pause pour vous détendre.
+5. When the timer reaches zero, the screen color will indicate it's time for a break. Enjoy your break to relax.
 
-6. Répétez le processus autant de fois que vous le souhaitez pour rester productif et concentré.
+6. **Repeat the process** as many times as you wish to stay productive and focused.
 
-## Captures d'écran 📸
+## Screenshots 📸
 
-![Capture d'écran de l'application](img/Pomodoro.PNG)
+![Application screenshot](img/Pomodoro.PNG)
 
-## Développement 💻
+## Development 💻
 
-Si vous souhaitez contribuer au développement de cette application, voici comment commencer :
+If you want to contribute to the development of this application, here's how to get started:
 
-1. Clonez ce dépôt : `git clone https://github.com/Firim4r/Pomodoro.git`
+1. **Clone this repository**: `git clone https://github.com/Firim4r/Pomodoro.git`
 
-2. Contribuez en améliorant le code ou en ajoutant de nouvelles fonctionnalités.
+2. **Contribute** by improving the code or adding new features.
 
-## Auteur 👤
+## Author 👤
 
-👤 Cyprien De La Poëze D'Harambure
-- GitHub : [@Firim4r ](https://github.com/Firim4r)
+👤 **Cyprien De La Poëze D'Harambure**
+- GitHub: [@Firim4r ](https://github.com/Firim4r)
 
-N'hésitez pas à signaler des problèmes ou à proposer des améliorations en ouvrant une issue sur ce dépôt.
+Feel free to **report issues** or **suggest improvements** by opening an issue on this repository.
