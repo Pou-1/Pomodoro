@@ -326,6 +326,27 @@ function Button60ActualInput(i, top){
     }
 }
 
+function isScreen169() {
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+  
+    // Calculate the aspect ratio
+    const aspectRatio = screenWidth / screenHeight;
+  
+    // Check if the aspect ratio is approximately 16:9
+    return Math.abs(aspectRatio - (16 / 9)) < 0.01;
+  }
+
+  function handleScreenSizeChange() {
+    if (isScreen169()) {
+      console.log("The screen is in a 16:9 aspect ratio.");
+      document.getElementById("ClockDiv60").style.visibility = "visible";
+    } else {
+      console.log("The screen is not in a 16:9 aspect ratio.");
+      document.getElementById("ClockDiv60").style.visibility = "hidden";
+    }
+  }
+
 //---------- Permit time to pass in the timer ----------\\
 setInterval(() => {
     if(ResetStartTimer == 1){
@@ -513,6 +534,8 @@ document.getElementById("TravailHours").addEventListener("input", (event) => {
     changeInputBackground();
     document.getElementById("PauseSecondes").style.backgroundColor = "#d49218";
   });
+
+  window.addEventListener("resize", handleScreenSizeChange);
 
 start();
 

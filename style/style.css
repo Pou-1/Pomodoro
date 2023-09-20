@@ -305,11 +305,8 @@ canvas {
     display: block !important;
   }
   .sub-div1, .sub-div2{
-    height: 400px;
+    height: 50vw !important;
   }
-}
-
-@media screen and (max-width: 700px) {
   .Temps .ModifInput {
     width: 20% !important;
   }
@@ -322,16 +319,13 @@ canvas {
   .modifTimer2{
     font-size: 20px !important;
   }
-
   .modifTimer{
     width: 50% !important;
     font-size: 15px !important;
   }
-
   .keyboardLogo{
     font-size: 10vw !important;
   }
-
   footer{
     font-size: 3vw !important;
   }
@@ -352,5 +346,18 @@ canvas {
 @media screen and (min-width: 1220px) {
   label{
     font-size: 35px;
+  }
+}
+
+@media screen and (max-width: 1919px) {
+  .sub-div1, .sub-div2{
+    height: 350px;
+  }
+}
+
+/* Apply styles when the screen is not 16:9 */
+@media screen and (min-width: 1920px) {
+  .sub-div1, .sub-div2{
+    height: 750px !important;
   }
 }
