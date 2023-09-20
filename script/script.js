@@ -22,8 +22,7 @@ let modif = 0;
 
 let ActualInput = -1; // Actual Input focus
 
-let PrecedentValueInput = -1;
-let PrecedentValueInput2 = -1;
+let PrecedentValueInputOfActualInputClicked = -1;
 
 const canvas60 = document.getElementById("canvas60");
 const ctx60 = canvas60.getContext("2d");
@@ -224,8 +223,7 @@ function drawClock(NumberClock, NumberStart, Number, Text, xM, yM, lM, tM) {
   
       button.style.position = "absolute";
       button.style.left = ((canvas60.width / 2 + x) - lM) + "px";
-      button.style.top = ((canvas60.height / 2 + y) - 5) + "px";
-  
+      button.style.top = ((canvas60.height / 2 + y) - 5) + "px";  
   
       let NumInputButton = -1;
   
@@ -297,13 +295,13 @@ function Button60ActualInput(i, top){
         let valueMax = value + 8;
         
         drawClock(i, value, valueMax, "", 0.55, 0.55, top[i], 0);
-        PrecedentValueInput2 = document.getElementById(strInputListener[i]).value;
+        PrecedentValueInputOfActualInputClicked = document.getElementById(strInputListener[i]).value;
 
-        if(PrecedentValueInput2 == 0){
-            PrecedentValueInput2 = PrecedentValueInput2 + "0";
+        if(PrecedentValueInputOfActualInputClicked == 0){
+            PrecedentValueInputOfActualInputClicked = PrecedentValueInputOfActualInputClicked + "0";
         }
-        document.getElementById(i + "clock-button" + PrecedentValueInput2).style.backgroundColor = "#ffffff";
-        document.getElementById(i + "clock-button" + PrecedentValueInput2).style.color = "rgb(0, 0, 0)";
+        document.getElementById(i + "clock-button" + PrecedentValueInputOfActualInputClicked).style.backgroundColor = "#ffffff";
+        document.getElementById(i + "clock-button" + PrecedentValueInputOfActualInputClicked).style.color = "rgb(0, 0, 0)";
         
         CreateListenerButton(i + "clock-button", top[i], 0, i);
     }
@@ -311,14 +309,19 @@ function Button60ActualInput(i, top){
     if(i == 1 || i == 4){
         if(i == 4){
             drawClock(i, 0, 12, "", 0.95, 0.95, 225, 0);
+
+            PrecedentValueInputOfActualInputClicked = document.getElementById("PauseHours").value;
+
+            document.getElementById(i + "clock-button" + PrecedentValueInputOfActualInputClicked).style.backgroundColor = "#ffffff";
+            document.getElementById(i + "clock-button" + PrecedentValueInputOfActualInputClicked).style.color = "rgb(0, 0, 0)";
         }
         else{
             drawClock(i, 0, 12, "", 0.95, 0.95, 1200, 0);
 
-            PrecedentValueInput = document.getElementById("TravailHours").value;
+            PrecedentValueInputOfActualInputClicked = document.getElementById("TravailHours").value;
 
-            document.getElementById(i + "clock-button" + PrecedentValueInput).style.backgroundColor = "#ffffff";
-            document.getElementById(i + "clock-button" + PrecedentValueInput).style.color = "rgb(0, 0, 0)";
+            document.getElementById(i + "clock-button" + PrecedentValueInputOfActualInputClicked).style.backgroundColor = "#ffffff";
+            document.getElementById(i + "clock-button" + PrecedentValueInputOfActualInputClicked).style.color = "rgb(0, 0, 0)";
         }
     }
 }
@@ -462,8 +465,8 @@ document.getElementById("TravailSecondes").addEventListener("change", (event) =>
 //---------- Listener for the clocks ----------\\
 document.getElementById("TravailHours").addEventListener("input", (event) => {
     
-    document.getElementById("1clock-button" + PrecedentValueInput).style.backgroundColor = "transparent";
-    document.getElementById("1clock-button" + PrecedentValueInput).style.color = "#ffffff";
+    document.getElementById("1clock-button" + PrecedentValueInputOfActualInputClicked).style.backgroundColor = "transparent";
+    document.getElementById("1clock-button" + PrecedentValueInputOfActualInputClicked).style.color = "#ffffff";
 
     let numNewButton = document.getElementById("TravailHours").value;
 
@@ -478,7 +481,7 @@ document.getElementById("TravailHours").addEventListener("input", (event) => {
     document.getElementById("1clock-button" + numNewButton).style.backgroundColor = "#ffffff";
     document.getElementById("1clock-button" + numNewButton).style.color = "rgb(0, 0, 0)";
 
-    PrecedentValueInput = numNewButton;
+    PrecedentValueInputOfActualInputClicked = numNewButton;
   });
 
  document.getElementById("TravailHours").addEventListener("click", (event) => {
