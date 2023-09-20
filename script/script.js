@@ -113,6 +113,7 @@ function functResetStartTimer(){
         ResetStartTimer = 0;
         
         const button = document.getElementById("stopTimer");
+        button.innerText = "ㅤ";
         const playIcon = document.createElement("i");
         playIcon.className = "fa-solid fa-play LogoPlay";
         button.innerHTML = '';
@@ -134,6 +135,7 @@ function functResetStartTimer(){
     else{
         ResetStartTimer = 1;
         const button = document.getElementById("stopTimer");
+        button.innerText = "ㅤ";
         const squareIcon = document.createElement("i");
         squareIcon.className = "fa-solid fa-square LogoPlay";
         button.innerHTML = '';
