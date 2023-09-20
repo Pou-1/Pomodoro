@@ -54,7 +54,6 @@ footer {
   color: #fff;
   text-align: center;
   padding: 10px;
-  padding-bottom: auto;
 }
 
 .keyboardLogo {
@@ -140,17 +139,27 @@ button:hover {
   font-size: 4vw;
 }
 
-.Temps p{
-  font-weight: bold;
+label {
+  font-size: 2.5vw;
+  width: 28%; /* Ajoutez cette propriété */
+  text-align: center; /* Pour aligner le texte à droite */
 }
 
-@media screen and (min-width: 880px) {
-  .Temps p, .ModifInput{
-    font-size: 50px;
-  }
-  .ModifInput::placeholder {
-    font-size: 40px;
-  }
+.DivLabel {
+  width: 100%;
+  display: flex; /* Ajoutez cette propriété pour permettre aux labels de partager l'espace */
+}
+
+.DivLabel label:first-child {
+  margin-left: 10%;
+}
+
+.DivLabel label:nth-child(2) {
+  width: 24%;
+}
+
+.Temps p{
+  font-weight: bold;
 }
 
 /*---------- <p> of the mods "Travail" and "Pause" inside the modify option ----------*/
@@ -189,7 +198,7 @@ button:hover {
 
 .divButton{
   position: relative;
-  height: 450px;
+  height: 465px;
 }
 
 .Modify{
@@ -239,7 +248,7 @@ canvas {
   width: 100%;
   margin: auto;
   display: contents;
-  height: 450px;
+  height: 480px;
   background-color: #00ffa9;
 }
 
@@ -325,5 +334,23 @@ canvas {
 
   footer{
     font-size: 3vw !important;
+  }
+  label{
+    font-size: 4.5vw;
+  }
+}
+
+@media screen and (min-width: 880px) {
+  .Temps p, .ModifInput{
+    font-size: 50px;
+  }
+  .ModifInput::placeholder {
+    font-size: 40px;
+  }
+}
+
+@media screen and (min-width: 1220px) {
+  label{
+    font-size: 35px;
   }
 }
