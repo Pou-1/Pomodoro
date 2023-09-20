@@ -45,3 +45,8 @@ If you want to contribute to the development of this application, here's how to 
 - GitHub: [@Firim4r ](https://github.com/Firim4r)
 
 Feel free to **report issues** or **suggest improvements** by opening an issue on this repository.
+
+
+## Surprise 🎁
+
+If your screen is a 1920 px wide, u can have a little suprise !
