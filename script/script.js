@@ -32,10 +32,13 @@ radius60 = radius60 * 0.90;
 
 const buttonContainer60 = document.getElementById("clock-buttons60");
 
+//---------- Variable of actual Clock----------\\
 let NumberOfClock = 0;
 
+//---------- Variable of actual button Clicked on Clock ----------\\
 let NumberButtonClicked = -1;
 
+//---------- Variable of background ----------\\
 let backgroundPause = "rgb(39, 129, 202)";
 let backgroundTravail = "rgb(59, 29, 55)";
 
@@ -82,6 +85,7 @@ function formatHour(Hours, Minutes, Secondes, HoursPrint, MinutesPrint, Secondes
     return HoursPrint + MinutesPrint + SecondesPrint;
 }
 
+//---------- Function of change for the actual mode ----------\\
 function ChangementPause(){
     travail = 0;
     document.body.style.background = "#2781CA";
@@ -144,13 +148,11 @@ function functResetStartTimer(){
 
 function changeInputBackground(){
     if(travail == 0){
-        let strInputListener = ["", "TravailHours", "TravailMinutes", "TravailSecondes", "PauseHours", "PauseMinutes", "PauseSecondes"];
         for(let i = 1; i < 7; i++){
             document.getElementById(strInputListener[i]).style.background = backgroundPause;
         }
     }
     if(travail == 1){
-        let strInputListener = ["", "TravailHours", "TravailMinutes", "TravailSecondes", "PauseHours", "PauseMinutes", "PauseSecondes"];
         for(let i = 1; i < 7; i++){
             document.getElementById(strInputListener[i]).style.background = backgroundTravail;
         }
@@ -171,15 +173,15 @@ function functModifTimer(){
     }
 }
 
+//---------- Functiun to verify input and return a number ---------\\
 function Verifyinput(value){
-    // Assurez-vous que la valeur est un nombre
     if (!isNaN(value)) {
-        value = parseInt(value, 10);    // Convertit la valeur en nombre
+        value = parseInt(value, 10);
         if (value <= 0) {
             value = 0;
         }
     } else {
-        value = 0; // Si la valeur n'est pas un nombre, remplacez-la par 0
+        value = 0;
     }
     return value;
 }
@@ -202,6 +204,7 @@ function getHoursMinute(TimeMinutes){
     return [hours, minutes, 0];
 }
 
+//---------- Functiun to draw a circle of buttons ---------\\
 function drawClock(NumberClock, NumberStart, Number, Text, xM, yM, lM, tM) {
     let numPrint = 0; 
     for (let num = 0; num < (Number - NumberStart)+1; num++) {
@@ -248,6 +251,7 @@ function drawClock(NumberClock, NumberStart, Number, Text, xM, yM, lM, tM) {
     }
   }
   
+  //---------- Function to delete a circle of buttons on the inputs Minutes and Seconds ---------\\
   function deleteClockButtons(clockNumber) {
     if(NumberButtonClicked != -1){
         for(let i = (NumberButtonClicked + 1); i < (NumberButtonClicked + 10); i++){
@@ -284,6 +288,7 @@ function DeletesButton(){
     }
 }
 
+//---------- Function to change the background of the button link to the input value ---------\\
 function Button60ActualInput(i, top){
     DeletesButton();
     if(i == 2 || i == 3 || i == 5 || i == 6){
@@ -326,6 +331,7 @@ function Button60ActualInput(i, top){
     }
 }
 
+//---------- Function to check if sceen is 16:9 ---------\\
 function isScreen169() {
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
@@ -337,12 +343,14 @@ function isScreen169() {
     return Math.abs(aspectRatio - (16 / 9)) < 0.01;
   }
 
+  
+//---------- Function to meke visible clock if screen is 16:9 ---------\\
   function handleScreenSizeChange() {
     if (isScreen169()) {
-      console.log("The screen is in a 16:9 aspect ratio.");
+      //console.log("The screen is in a 16:9 aspect ratio.");
       document.getElementById("ClockDiv60").style.visibility = "visible";
     } else {
-      console.log("The screen is not in a 16:9 aspect ratio.");
+      //console.log("The screen is not in a 16:9 aspect ratio.");
       document.getElementById("ClockDiv60").style.visibility = "hidden";
     }
   }
@@ -375,7 +383,7 @@ setInterval(() => {
         }
         document.getElementById("timer").innerHTML = formatHour(Hours, Minutes, Secondes, HoursPrint, MinutesPrint, secondesPrint);
     }
-}, 10);
+}, 1000);
 
 
 //---------- Listener on all input ----------\\
