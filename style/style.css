@@ -15,8 +15,8 @@ body{
 
 /*---------- Title "TIMER POMODORO" ----------*/
 .FirstTitle{
-  font-size: 60px;
-  margin: 30px;
+  font-size: 81px;
+  margin: 18px;
 }
 
 /*---------- Size of number in the timer ----------*/
@@ -47,9 +47,7 @@ body{
   height: 15vw;
 }
 
-main {
-  margin-bottom: 20px;
-}
+
 
 footer {
   background-color: rgb(51, 22, 47);
@@ -59,31 +57,9 @@ footer {
   padding-bottom: auto;
 }
 
-.keyboardLogo{
+.keyboardLogo {
   font-size: 80px;
-  margin-bottom: 30px;
-}
-
-/*---------- When screen width > 800px, change styles ----------*/
-@media screen and (min-width: 800px) {
-  .time {
-    width: 500px;
-    height: 500px;
-  }
-
-  .timer{
-    font-size: 80px;
-  }
-
-  .StartTimer {
-    font-size: 30px;
-    width: 100px;
-    height: 100px;
-  }
-
-  .copyright{
-    font-size: 20px;
-  }
+  margin-bottom: 15px;
 }
 
 /*  Button  */
@@ -110,12 +86,12 @@ button:hover {
 }
 
 /*  Div with "Travail" and "Pause"  */
-.divTravailPause p{
+.divActualTimerModBetweenWorkBreak p{
   font-size: 50px;
   display: inline;
 }
 
-.divTravailPause{
+.divActualTimerModBetweenWorkBreak{
   margin: 0 auto;
   width: 40%;
   border: 2px solid #ffffff;
@@ -124,7 +100,7 @@ button:hover {
 
 /*---------- When screen width < 400px, change styles ----------*/
 @media screen and (max-width: 400px) {
-  .divTravailPause p{
+  .divActualTimerModBetweenWorkBreak p{
     font-size: 10vw;
   }
   .modifTimer{
@@ -137,10 +113,10 @@ button:hover {
 }
 
 /*  Input for modify the time of the 2 mods  */
-input{
+.ModifInput{
   -moz-appearance: textfield;
   height: fit-content;
-  background-color: transparent;
+  background-color: rgb(59, 29, 55);
   color : var(--fontColor);
   border: none;
   text-align: center;
@@ -149,15 +125,19 @@ input{
 }
 
 /* Style modify when input is focus */
-input:focus {
+.ModifInput:focus {
   background-color: #d49218 !important;
   outline: none !important;
 }
 
 /*---------- Div for the inputs and <p> ----------*/
-.Temps p, input{
+.Temps p, .ModifInput{
   font-size: 4.5vw;
   display: inline;
+}
+
+.ModifInput::placeholder {
+  font-size: 4vw;
 }
 
 .Temps p{
@@ -165,50 +145,25 @@ input:focus {
 }
 
 @media screen and (min-width: 880px) {
-  .Temps p, input{
+  .Temps p, .ModifInput{
     font-size: 50px;
   }
-}
-
-@media screen and (max-width: 700px) {
-  .Temps input {
-    width: 20% !important;
-  }
-  .FirstTitle{
-    font-size: 8vw;
-  }
-  .ModifyTitle{
-    font-size: 7vw !important;
-  }
-  .modifTimer2{
-    font-size: 20px !important;
-  }
-
-  .modifTimer{
-    width: 50% !important;
-    font-size: 15px !important;
-  }
-
-  .keyboardLogo{
-    font-size: 10vw !important;
-  }
-  
-  footer{
-    font-size: 3vw !important;
+  .ModifInput::placeholder {
+    font-size: 40px;
   }
 }
 
 /*---------- <p> of the mods "Travail" and "Pause" inside the modify option ----------*/
-.Titreactual{
+.Titreactual {
   font-size: 5em;
   font-weight: bold;
-  margin-bottom: 10px;
-  margin-top: 10px;
+  margin-bottom: 5px;
+  margin-top: 5px;
 }
 
 .modifTimer{
   width: 29%;
-  margin: 2.3%;
+  margin: 1.3%;
   font-size: 1.7vw;
 }
 
@@ -230,6 +185,11 @@ input:focus {
 
 .visible{
   visibility: visible;
+}
+
+.divButton{
+  position: relative;
+  height: 450px;
 }
 
 .Modify{
@@ -278,8 +238,9 @@ input:focus {
 canvas {
   width: 100%;
   margin: auto;
+  display: contents;
   height: 450px;
-  display: block;
+  background-color: #00ffa9;
 }
 
 
@@ -305,6 +266,64 @@ canvas {
   font-size: 1.8vw;
   text-align: center;
   cursor: pointer;
-  margin-top: 200px;
-  margin-left: 63%;
+  margin-left: 18%;
+}
+
+/*---------- When screen width > 800px, change styles ----------*/
+@media screen and (min-width: 800px) {
+  .time {
+    width: 500px;
+    height: 500px;
+  }
+
+  .timer{
+    font-size: 80px;
+  }
+
+  .StartTimer {
+    font-size: 30px;
+    width: 100px;
+    height: 100px;
+  }
+
+  .copyright{
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .main-div{
+    display: block !important;
+  }
+  .sub-div1, .sub-div2{
+    height: 400px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .Temps .ModifInput {
+    width: 20% !important;
+  }
+  .FirstTitle{
+    font-size: 8vw;
+  }
+  .ModifyTitle{
+    font-size: 7vw !important;
+  }
+  .modifTimer2{
+    font-size: 20px !important;
+  }
+
+  .modifTimer{
+    width: 50% !important;
+    font-size: 15px !important;
+  }
+
+  .keyboardLogo{
+    font-size: 10vw !important;
+  }
+
+  footer{
+    font-size: 3vw !important;
+  }
 }

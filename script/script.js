@@ -22,6 +22,9 @@ let modif = 0;
 
 let ActualInput = -1; // Actual Input focus
 
+let PrecedentValueInput = -1;
+let PrecedentValueInput2 = -1;
+
 const canvas60 = document.getElementById("canvas60");
 const ctx60 = canvas60.getContext("2d");
 let radius60 = canvas60.height / 2;
@@ -33,6 +36,11 @@ const buttonContainer60 = document.getElementById("clock-buttons60");
 let NumberOfClock = 0;
 
 let NumberButtonClicked = -1;
+
+let backgroundPause = "rgb(39, 129, 202)";
+let backgroundTravail = "rgb(59, 29, 55)";
+
+let strInputListener = ["", "TravailHours", "TravailMinutes", "TravailSecondes", "PauseHours", "PauseMinutes", "PauseSecondes"];
 
 //---------- Format hour and place it in the timer ----------\\
 document.getElementById("timer").innerHTML = formatHour(Hours, Minutes, Secondes);
@@ -75,43 +83,16 @@ function formatHour(Hours, Minutes, Secondes, HoursPrint, MinutesPrint, Secondes
     return HoursPrint + MinutesPrint + SecondesPrint;
 }
 
-//---------- Permit time to pass in the timer ----------\\
-setInterval(() => {
-    if(ResetStartTimer == 1){
-        if(Minutes == 0 && Hours > 0){
-            Minutes = 59;
-            Hours -= 1;
-        }
-        if(Secondes == 0 && Minutes > 0){
-            Secondes = 59;
-            Minutes -= 1;
-        }
-        else if(Secondes > 0){
-            Secondes -= 1;
-        }
-        if(Minutes == 0 && Hours == 0 && Secondes == 0 && travail == 1){
-            Hours = document.getElementById("PauseHours").value;
-            Minutes = document.getElementById("PauseMinutes").value;
-            Secondes = document.getElementById("PauseSecondes").value;
-            ChangementPause();
-        }
-        if(Minutes == 0 && Hours == 0 && Secondes == 0 && travail == 0){
-            Hours = document.getElementById("TravailHours").value;
-            Minutes = document.getElementById("TravailMinutes").value;
-            Secondes = document.getElementById("TravailSecondes").value;
-            ChangementTravail();
-        }
-        document.getElementById("timer").innerHTML = formatHour(Hours, Minutes, Secondes, HoursPrint, MinutesPrint, secondesPrint);
-    }
-}, 10);
-
 function ChangementPause(){
     travail = 0;
     document.body.style.background = "#2781CA";
     document.getElementById("Modifier").style.background = "#2781CA";
     document.getElementById("sub-div1").style.background = "#6EB5FF";
     document.getElementById("sub-div2").style.background = "#6EB5FF";
-    document.getElementById("Mod").innerText = "Pause";
+    document.getElementById("footer").style.backgroundColor = "rgb(22, 70, 121)";
+    document.getElementById("footer1").style.backgroundColor = "rgb(22, 70, 121)";
+    changeInputBackground();
+    document.getElementById("ActualTimerModBetweenWorkBreak").innerText = "Pause";
 }
 
 function ChangementTravail(){
@@ -120,7 +101,10 @@ function ChangementTravail(){
     document.getElementById("Modifier").style.background = "#3B1D37";
     document.getElementById("sub-div1").style.background = "#55264F";
     document.getElementById("sub-div2").style.background = "#55264F";
-    document.getElementById("Mod").innerText = "Travail";
+    changeInputBackground();
+    document.getElementById("footer").style.backgroundColor = "rgb(51, 22, 47)";
+    document.getElementById("footer1").style.backgroundColor = "rgb(51, 22, 47)";
+    document.getElementById("ActualTimerModBetweenWorkBreak").innerText = "Travail";
 }
 
 //---------- Link to Button in the timer, Start the timer or Reset and change value of timer link to the actual mod ----------\\
@@ -149,7 +133,6 @@ function functResetStartTimer(){
     }
     else{
         ResetStartTimer = 1;
-        
         const button = document.getElementById("stopTimer");
         const squareIcon = document.createElement("i");
         squareIcon.className = "fa-solid fa-square LogoPlay";
@@ -158,10 +141,20 @@ function functResetStartTimer(){
     }
 }
 
-//---------- Listener on all input ----------\\
-document.getElementById("stopTimer").addEventListener("click", (event) => {
-    functResetStartTimer();
-});
+function changeInputBackground(){
+    if(travail == 0){
+        let strInputListener = ["", "TravailHours", "TravailMinutes", "TravailSecondes", "PauseHours", "PauseMinutes", "PauseSecondes"];
+        for(let i = 1; i < 7; i++){
+            document.getElementById(strInputListener[i]).style.background = backgroundPause;
+        }
+    }
+    if(travail == 1){
+        let strInputListener = ["", "TravailHours", "TravailMinutes", "TravailSecondes", "PauseHours", "PauseMinutes", "PauseSecondes"];
+        for(let i = 1; i < 7; i++){
+            document.getElementById(strInputListener[i]).style.background = backgroundTravail;
+        }
+    }
+}
 
 //---------- Hide or make visible the inputs to modify the timer ----------\\
 function functModifTimer(){
@@ -208,6 +201,161 @@ function getHoursMinute(TimeMinutes){
     return [hours, minutes, 0];
 }
 
+function drawClock(NumberClock, NumberStart, Number, Text, xM, yM, lM, tM) {
+    let numPrint = 0; 
+    for (let num = 0; num < (Number - NumberStart)+1; num++) {
+      const button = document.createElement("button");
+      numPrint = NumberStart + num;
+      if(numPrint == 0){
+          button.textContent = numPrint.toString();
+      }
+      else{
+          button.textContent = numPrint.toString() + Text;
+      }
+      button.className = "clock-button60";
+      //button.id = "clock-button" + numPrint + "Clock" + NumberOfClock;
+      button.id = NumberClock + "clock-button" + numPrint + Text;
+  
+      const angle = ((num - 15) * (Math.PI * 2)) / ((Number - NumberStart)+1); // Position des boutons en fonction de l'angle
+      const x = radius60  * xM * Math.cos(angle);
+      const y = radius60 * yM * Math.sin(angle);
+  
+      button.style.position = "absolute";
+      button.style.left = ((canvas60.width / 2 + x) - lM) + "px";
+      button.style.top = ((canvas60.height / 2 + y) - 5) + "px";
+  
+  
+      let NumInputButton = -1;
+  
+      button.addEventListener("mouseover", () => {
+          NumInputButton = document.getElementById(strInputListener[NumberClock]).value;
+          if((NumberClock == 2 || NumberClock == 3 ||NumberClock == 5 || NumberClock == 6) && NumInputButton == 0){
+            NumInputButton = "00";
+          }
+          document.getElementById(NumberClock + "clock-button" + NumInputButton).style.backgroundColor = "transparent";
+          document.getElementById(NumberClock + "clock-button" + NumInputButton).style.color = "#ffffff";
+
+          document.getElementById(strInputListener[NumberClock]).value = button.innerHTML;
+          document.getElementById(button.id).style.backgroundColor = "#ffffff";
+          document.getElementById(button.id).style.color = "rgb(0, 0, 0)";
+      });
+  
+       document.getElementById(strInputListener[NumberClock]).addEventListener("click", (event) => {
+          NumInputButton = document.getElementById(strInputListener[NumberClock]).value;
+       });
+  
+      buttonContainer60.appendChild(button);
+    }
+  }
+  
+  function deleteClockButtons(clockNumber) {
+    if(NumberButtonClicked != -1){
+        for(let i = (NumberButtonClicked + 1); i < (NumberButtonClicked + 10); i++){
+            let id = clockNumber + "clock-button" + i;
+            document.getElementById("clock-buttons60").removeChild(document.getElementById(id));
+        }
+    }
+}
+
+/* Create a Listener on button to draw a little clock on click, permit to create a 60 min clock */
+function CreateListenerButton(str, lM, xM, clockNumber){
+    let cmpt = 0;
+    for(let i = 1; i < 61; i = i + 10){
+        let strButton = str + cmpt;
+
+        if(cmpt == 0){
+            strButton = strButton + "0";
+        }
+
+        document.getElementById(strButton).addEventListener("mouseover", (event) => {
+            drawClock(clockNumber, i, (i+8), "", 0.55, 0.55, lM, xM);
+            deleteClockButtons(clockNumber);
+            NumberButtonClicked = (i - 1);
+        });
+        cmpt = cmpt + 10;
+    }
+}
+
+/* Delete all buttons */
+function DeletesButton(){
+    const parentElement = document.getElementById("clock-buttons60");
+    while (parentElement.firstChild) {
+        parentElement.removeChild(parentElement.firstChild);
+    }
+}
+
+function Button60ActualInput(i, top){
+    DeletesButton();
+    if(i == 2 || i == 3 || i == 5 || i == 6){
+        drawClock(i, 0, 5, "0", 0.95, 0.95, top[i], 0);
+        let value = document.getElementById(strInputListener[i]).value;
+        value = parseInt(value);
+        value = (Math.floor(value / 10) * 10) + 1;
+        NumberButtonClicked = value - 1;
+        let valueMax = value + 8;
+        
+        drawClock(i, value, valueMax, "", 0.55, 0.55, top[i], 0);
+        PrecedentValueInput2 = document.getElementById(strInputListener[i]).value;
+
+        if(PrecedentValueInput2 == 0){
+            PrecedentValueInput2 = PrecedentValueInput2 + "0";
+        }
+        document.getElementById(i + "clock-button" + PrecedentValueInput2).style.backgroundColor = "#ffffff";
+        document.getElementById(i + "clock-button" + PrecedentValueInput2).style.color = "rgb(0, 0, 0)";
+        
+        CreateListenerButton(i + "clock-button", top[i], 0, i);
+    }
+
+    if(i == 1 || i == 4){
+        if(i == 4){
+            drawClock(i, 0, 12, "", 0.95, 0.95, 225, 0);
+        }
+        else{
+            drawClock(i, 0, 12, "", 0.95, 0.95, 1200, 0);
+
+            PrecedentValueInput = document.getElementById("TravailHours").value;
+
+            document.getElementById(i + "clock-button" + PrecedentValueInput).style.backgroundColor = "#ffffff";
+            document.getElementById(i + "clock-button" + PrecedentValueInput).style.color = "rgb(0, 0, 0)";
+        }
+    }
+}
+
+//---------- Permit time to pass in the timer ----------\\
+setInterval(() => {
+    if(ResetStartTimer == 1){
+        if(Minutes == 0 && Hours > 0){
+            Minutes = 59;
+            Hours -= 1;
+        }
+        if(Secondes == 0 && Minutes > 0){
+            Secondes = 59;
+            Minutes -= 1;
+        }
+        else if(Secondes > 0){
+            Secondes -= 1;
+        }
+        if(Minutes == 0 && Hours == 0 && Secondes == 0 && travail == 1){
+            Hours = document.getElementById("PauseHours").value;
+            Minutes = document.getElementById("PauseMinutes").value;
+            Secondes = document.getElementById("PauseSecondes").value;
+            ChangementPause();
+        }
+        if(Minutes == 0 && Hours == 0 && Secondes == 0 && travail == 0){
+            Hours = document.getElementById("TravailHours").value;
+            Minutes = document.getElementById("TravailMinutes").value;
+            Secondes = document.getElementById("TravailSecondes").value;
+            ChangementTravail();
+        }
+        document.getElementById("timer").innerHTML = formatHour(Hours, Minutes, Secondes, HoursPrint, MinutesPrint, secondesPrint);
+    }
+}, 10);
+
+
+//---------- Listener on all input ----------\\
+document.getElementById("stopTimer").addEventListener("click", (event) => {
+    functResetStartTimer();
+  });
 
 document.getElementById("TravailHours").addEventListener("change", (event) => {
     let value = parseInt(event.target.value, 10);
@@ -283,7 +431,7 @@ document.getElementById("TravailSecondes").addEventListener("change", (event) =>
         value = value%60;
     }
     event.target.value = value;
-    });
+  });
 
   document.getElementById("PauseSecondes").addEventListener("change", (event) => {
     let value = parseInt(event.target.value, 10);
@@ -305,68 +453,15 @@ document.getElementById("TravailSecondes").addEventListener("change", (event) =>
     event.target.value = Time2[2];
     document.getElementById("PauseHours").value = Time3[0];
     document.getElementById("PauseMinutes").value = Time3[1];
-    });
-
-function drawClock(NumberClock, NumberStart, Number, Text, xM, yM, lM, tM) {
-  NumberOfClock = NumberOfClock + 1;
-  //console.log(NumberOfClock);
-  let numPrint = 0; 
-  for (let num = 0; num < (Number - NumberStart)+1; num++) {
-    const button = document.createElement("button");
-    numPrint = NumberStart + num;
-    if(numPrint == 0){
-        button.textContent = numPrint.toString();
-    }
-    else{
-        button.textContent = numPrint.toString() + Text;
-    }
-    button.className = "clock-button60";
-    //button.id = "clock-button" + numPrint + "Clock" + NumberOfClock;
-    button.id = NumberClock + "clock-button" + numPrint;
-
-    const angle = ((num - 15) * (Math.PI * 2)) / ((Number - NumberStart)+1); // Position des boutons en fonction de l'angle
-    const x = radius60  * xM * Math.cos(angle);
-    const y = radius60 * yM * Math.sin(angle);
-
-    button.style.position = "absolute";
-    button.style.left = ((canvas60.width / 2 + x) - lM) + "px";
-    button.style.top = ((canvas60.height / 2 + y) + 80) + "px";
+  });
 
 
-    let NumInputButton = -1;
 
-    button.addEventListener("mouseover", () => {
-        NumInputButton = document.getElementById("TravailHours").value;
-
-        document.getElementById("0clock-button" + NumInputButton).style.backgroundColor = "transparent";
-        document.getElementById("0clock-button" + NumInputButton).style.color = "#ffffff";
-
-        document.getElementById("TravailHours").value = num;
-        document.getElementById(button.id).style.backgroundColor = "#ffffff";
-        document.getElementById(button.id).style.color = "rgb(0, 0, 0)";
-    });
-
-     document.getElementById("TravailHours").addEventListener("click", (event) => {
-        NumInputButton = document.getElementById("TravailHours").value;
-     });
-
-    buttonContainer60.appendChild(button);
-  }
-}
-
-let PrecedentValueInput = -1;
-
-document.getElementById("TravailHours").addEventListener("click", (event) => {
-    document.getElementById("TravailHours").style.backgroundColor = "#d49218";
-
-    document.getElementById("TravailMinutes").style.backgroundColor = "transparent";
-    document.getElementById("TravailSecondes").style.backgroundColor = "transparent";
-});
-
+//---------- Listener for the clocks ----------\\
 document.getElementById("TravailHours").addEventListener("input", (event) => {
     
-    document.getElementById("0clock-button" + PrecedentValueInput).style.backgroundColor = "transparent";
-    document.getElementById("0clock-button" + PrecedentValueInput).style.color = "#ffffff";
+    document.getElementById("1clock-button" + PrecedentValueInput).style.backgroundColor = "transparent";
+    document.getElementById("1clock-button" + PrecedentValueInput).style.color = "#ffffff";
 
     let numNewButton = document.getElementById("TravailHours").value;
 
@@ -377,65 +472,47 @@ document.getElementById("TravailHours").addEventListener("input", (event) => {
     if(Number.isNaN(numNewButton)){
         numNewButton = 0;
     }
-    //console.log(numNewButton);
 
-    document.getElementById("0clock-button" + numNewButton).style.backgroundColor = "#ffffff";
-    document.getElementById("0clock-button" + numNewButton).style.color = "rgb(0, 0, 0)";
+    document.getElementById("1clock-button" + numNewButton).style.backgroundColor = "#ffffff";
+    document.getElementById("1clock-button" + numNewButton).style.color = "rgb(0, 0, 0)";
 
     PrecedentValueInput = numNewButton;
- });
+  });
+
+ document.getElementById("TravailHours").addEventListener("click", (event) => {
+    changeInputBackground();
+    document.getElementById("TravailHours").style.backgroundColor = "#d49218";
+  });
  
  document.getElementById("TravailMinutes").addEventListener("click", (event) => {
-    document.getElementById("TravailHours").style.backgroundColor = "transparent";
-    document.getElementById("TravailSecondes").style.backgroundColor = "transparent";
- });
+    changeInputBackground();
+    document.getElementById("TravailMinutes").style.backgroundColor = "#d49218";
+  });
  
  document.getElementById("TravailSecondes").addEventListener("click", (event) => {
-    document.getElementById("TravailHours").style.backgroundColor = "transparent";
-    document.getElementById("TravailMinutes").style.backgroundColor = "transparent";
- });
+    changeInputBackground();
+    document.getElementById("TravailSecondes").style.backgroundColor = "#d49218";
+  });
 
-function deleteClockButtons() {
-    if(NumberButtonClicked != -1){
-        //console.log("START : " + NumberButtonClicked);
-        for(let i = (NumberButtonClicked + 1); i< (NumberButtonClicked + 10); i++){
-            let id = "1clock-button" + i;
-            //console.log(id);
-            document.getElementById("clock-buttons60").removeChild(document.getElementById(id));
-        }
-    }
-}
+ document.getElementById("PauseHours").addEventListener("click", (event) => {
+    changeInputBackground();
+    document.getElementById("PauseHours").style.backgroundColor = "#d49218";
+  });
 
-/* Create a Listener on button to draw a little clock on click, permit to create a 60 min clock */
-function CreateListenerButton(str, lM, xM){
-    let cmpt = 0;
-    for(let i = 1; i < 61; i = i + 10){
-        let strButton = str + cmpt;
-        //console.log(strButton);
-
-        cmpt = cmpt + 1;
-
-        document.getElementById(strButton).addEventListener("click", (event) => {
-            drawClock(1, i, (i+8), "", 0.55, 0.55, lM, xM);
-            deleteClockButtons();
-            NumberButtonClicked = (i - 1);
-        });
-    }
-}
-
-/* Delete all buttons */
-function DeletesButton(){
-    const parentElement = document.getElementById("clock-buttons60");
-    while (parentElement.firstChild) {
-        parentElement.removeChild(parentElement.firstChild);
-    }
-}
+ document.getElementById("PauseMinutes").addEventListener("click", (event) => {
+    changeInputBackground();
+    document.getElementById("PauseMinutes").style.backgroundColor = "#d49218";
+  });
+ 
+ document.getElementById("PauseSecondes").addEventListener("click", (event) => {
+    changeInputBackground();
+    document.getElementById("PauseSecondes").style.backgroundColor = "#d49218";
+  });
 
 start();
 
 function start(){
     let strModiTimer = "";
-    let strInputListener = ["", "TravailHours", "TravailMinutes", "TravailSecondes", "PauseHours", "PauseMinutes", "PauseSecondes"];
     for(let i = 1; i < 3; i++){
         strModiTimer = "modifTimer" + i;
         document.getElementById(strModiTimer).addEventListener("click", (event) => {
@@ -459,30 +536,13 @@ function start(){
             DeletesButton()
         });
     }
+    let top = [0, 1200, 1200, 1200, 225, 225, 225];
     for(let i = 1; i < 7; i++){
         document.getElementById(strInputListener[i]).addEventListener("click", (event) => {
-            DeletesButton();
-            if(i == 5 || i == 6){
-                drawClock(0, 0, 5, "0", 0.95, 0.95, 0, 0);
-                CreateListenerButton("0clock-button", 0, 0);
-            }
-            if(i == 2 || i == 3){
-                drawClock(0, 0, 5, "0", 0.95, 0.95, 970, 0);
-                CreateListenerButton("0clock-button", 970, 0);
-            }
-            if(i == 1 || i == 4){
-                if(i == 4){
-                    drawClock(0, 0, 12, "", 0.95, 0.95, 0, 0);
-                }
-                else{
-                    drawClock(0, 0, 12, "", 0.95, 0.95, 970, 0);
-
-                    PrecedentValueInput = document.getElementById("TravailHours").value;
-
-                    document.getElementById("0clock-button" + PrecedentValueInput).style.backgroundColor = "#ffffff";
-                    document.getElementById("0clock-button" + PrecedentValueInput).style.color = "rgb(0, 0, 0)";
-                }
-            }
+            Button60ActualInput(i, top);
+        });
+        document.getElementById(strInputListener[i]).addEventListener("input", (event) => {
+            Button60ActualInput(i, top);
         });
     }
 }
